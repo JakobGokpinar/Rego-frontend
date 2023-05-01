@@ -8,7 +8,7 @@ const createImage = async (url) =>
     });
 
 
-const getCroppedImage = async (imageSrc) => {
+export const getCroppedImage = async (imageSrc) => {
     const myImage = await createImage(imageSrc);
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -34,4 +34,4 @@ const getCroppedImage = async (imageSrc) => {
     return canvas;
 }
 
-modgetCroppedImageule.exports = {createImage, getCroppedImage}
+// modgetCroppedImageule.exports = {createImage, getCroppedImage}
