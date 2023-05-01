@@ -1,4 +1,3 @@
-
 const createImage = async (url) =>
     new Promise((resolve, reject) => {
         var newImage = new Image();
@@ -35,4 +34,4 @@ const getCroppedImage = async (imageSrc) => {
     return canvas;
 }
 
-module.exports = {createImage, getCroppedImage}
+modgetCroppedImageule.exports = {createImage, getCroppedImage}
