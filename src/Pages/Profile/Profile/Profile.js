@@ -1,6 +1,5 @@
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
-import { getCroppedImage } from "../../../utils/cropImage";
 import { dataURLtoFile } from "../../../utils/dataURltoFile";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Row from "react-bootstrap/Row";
@@ -11,7 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser,removeProfilePicture } from "../../../features/userSliceActions";
 import Spinner from "react-bootstrap/Spinner";
-
+import {getCroppedImage} from '../../../utils/cropImage.js';
 const Profile = () => {
   const user = useSelector(state => state.user.user);
   const hiddenFileInput = React.useRef(null);
