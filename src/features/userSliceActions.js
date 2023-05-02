@@ -84,7 +84,7 @@ export const logoutRequest = () => {
                 const responseMsg = response.data;
                 if(responseMsg === 'user logged out') {
                     dispatch(userActions.logout())
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: 'Du logget ut'}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: 'Du har logget ut'}))
                 } else {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }

@@ -226,7 +226,7 @@ const submitAnnonce = async (event) => {
  const uploadImagesToServer =  async (formData, annonceProps, cb) => {
   await instanceAxs.post('/newannonce/imageupload', formData).then(result => {
     console.log(result)
-      if (result.status === 200) {
+      if (result.data.message === 'images uploaded') {
         let annonceId = result.data.annonceId;
         let copyImages = imageArray;
         let returnedImages = result.data.files;
@@ -570,7 +570,6 @@ const submitAnnonce = async (event) => {
                                     <p className="preview-content-heading mb-3"> Nøkkelinfo</p>
                                     <div className="special-properties-container">
                                         {specPropArray.length > 0 && specPropArray.map((item, index) => {
-                                          console.log(specPropArray)
                                               return(
                                                 <div key={index} className="spec-prop-item border">
                                                     <div key={index}className="spec-prop-box">
