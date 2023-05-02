@@ -225,6 +225,7 @@ const submitAnnonce = async (event) => {
 
  const uploadImagesToServer =  async (formData, annonceProps, cb) => {
   await instanceAxs.post('/newannonce/imageupload', formData).then(result => {
+    console.log(result)
       if (result.status === 200) {
         let annonceId = result.data.annonceId;
         let copyImages = imageArray;

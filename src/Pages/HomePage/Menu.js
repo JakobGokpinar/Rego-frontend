@@ -29,21 +29,23 @@ const Menu = () => {
     
         return(
             <Container fluid className='mainmenu-container page-container'>
-                {productArray.length > 0 && productArray.map((product, index) => {
-                    return(   
-                        <div key={index} className='mainmenu-container__item'>
-                            <ProductCard
-                                key={product.title}
-                                images={product.annonceImages}
-                                title={product.title}
-                                price={product.price}
-                                id={product._id}
-                                location={product.location}
-                                isFavorite={product.isFavorite}
-                            ></ProductCard>
-                        </div>                                    
-                    )
-                })}
+                <div className='mainmenu-content'>
+                    {productArray.length > 0 && productArray.map((product, index) => {
+                        return(   
+                            <div key={index} className='mainmenu-container__item'>
+                                <ProductCard
+                                    key={product.title}
+                                    images={product.annonceImages}
+                                    title={product.title}
+                                    price={product.price}
+                                    id={product._id}
+                                    location={product.location}
+                                    isFavorite={product.isFavorite}
+                                ></ProductCard>
+                            </div>                                    
+                        )
+                    })}
+                </div>
             </Container>
         )
     }   
