@@ -8,6 +8,7 @@ import {
   googleLoginRequest,
   sendLoginRequest,
 } from "../../features/userSliceActions";
+import { uiSliceActions } from "../../features/uiSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,10 @@ const Login = () => {
   };
 
   const handleGoogleAuth = (credentialResponse) => {
+    dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', 
+    msg: 'Google Service is currently under development. Please use your email to login'
+  }))
+  return;
     dispatch(
       googleLoginRequest({
         credential: credentialResponse.credential,

@@ -26,7 +26,8 @@ import { addToFavorites, removeFromFavorites } from "../../features/userSliceAct
 function ProductPage() {
 
     let { annonceId } = useParams();
-
+    const siteLink = 'https://rego.onrender.com';
+    
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const [annonce, setAnnonce] = useState('');
@@ -80,7 +81,7 @@ function ProductPage() {
     
       const copyAnnonceLink = (event) => {
         event.preventDefault();
-        let text = `http://localhost:3000/produkt/${annonceId}`;
+        let text = `${siteLink}/produkt/${annonceId}`;
         navigator.clipboard.writeText(text)
         dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Annons lenken ble kopiert'}));
         setShowShareModal(false)

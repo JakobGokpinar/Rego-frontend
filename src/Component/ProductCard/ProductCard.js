@@ -29,6 +29,7 @@ function ProductCard(props) {
   ];
 
   const shortDesc = description.slice(0, 34);
+  const siteLink = 'https://rego.onrender.com'; // http://localhost:3000
 
   const dispatch = useDispatch();
   const [isHovered, setHovered] = useState(false);
@@ -67,7 +68,7 @@ function ProductCard(props) {
 
   const copyAnnonceLink = (event) => {
     event.preventDefault();
-    let text = `http://localhost:3000/produkt/${id}`;
+    let text = `${siteLink}/produkt/${id}`;
     navigator.clipboard.writeText(text)
     dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Annons lenken ble kopiert'}));
     setShowModal(false)
@@ -139,7 +140,7 @@ function ProductCard(props) {
                         </Modal.Header>
                         <Modal.Body>
                             <p>Vil du dele denne annonsen?</p>
-                            <Form.Control type="text" className="mb-3" value={`http://localhost:3000/produkt/${id}`} disabled/>
+                            <Form.Control type="text" className="mb-3" value={`${siteLink}/produkt/${id}`} disabled/>
                             <Button type='button' variant="outline-primary" className="mb-2" onClick={copyAnnonceLink}>
                                 Kopier Lenken
                             </Button>
