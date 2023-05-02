@@ -271,13 +271,13 @@ const submitAnnonce = async (event) => {
  }
 
  useEffect(() => { 
+/*   fetch(`http://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`, 
+  {method: 'GET'}) */
   var postnum = annoncePropertyObject["postnumber"];
   console.log("ilk posta numarası", postnum)
   postnum = (postnum !== '' && postnum !== undefined) ? postnum : 0;  
   console.log("ikinci posta numarası", postnum)
-
-  fetch(`http://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`, 
-  {method: 'GET'})
+  instanceAxs.get('http://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft')
   .then(response => response.json())
   .then(data => {
     console.log("server dan gelen data", data)
