@@ -43,7 +43,7 @@ const Favorites = () => {
                                         ></ProductCard>
                                 </div>
                             )
-                        }) : <p>No Content</p>}
+                        }) : <p>Du har ingen favoritte annonser</p>}
                 </div>
             </div>
         )

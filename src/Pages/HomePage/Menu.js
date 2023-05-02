@@ -16,10 +16,7 @@ const Menu = () => {
     const receiveProducts = () => {
         instanceAxs.get('/search').then(response => {
             const products = response.data.productArray;
-            var productArray =  response.data.productArray;
-            const rows = [...Array( Math.ceil(products.length / 4) )];
-            const productRows = rows.map( (row, idx) => products.slice(idx * 4, idx * 4 + 4) ); 
-            setProductArray(Array(10).fill(productArray[0]))
+            setProductArray(products)
         })
     }
     
