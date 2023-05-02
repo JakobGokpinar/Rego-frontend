@@ -18,14 +18,17 @@ import { uiSliceActions } from "../../features/uiSlice";
 
 function ProductCard(props) {
 
-  const [images, title, location, price, id, isFavorite] = [
+  const [images, title, location, price, id, description, isFavorite] = [
     props.images || [ 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'],
     props.title || "no name",
     props.location || "no place",
     props.price || "0",
     props.id || null,
+    props.description || '',
     props.isFavorite || false
   ];
+
+  const shortDesc = description.slice(0, 34);
 
   const dispatch = useDispatch();
   const [isHovered, setHovered] = useState(false);
@@ -103,7 +106,7 @@ function ProductCard(props) {
                     <Card.Subtitle className="card-properties__item item-location ">{location}</Card.Subtitle>
                     <Card.Text className="card-properties__item item-price">{price} nok</Card.Text>
                     <Card.Text className="card-properties__item item-description">
-                          Some text about the nature right here.
+                          {shortDesc}
                     </Card.Text>
               </div>
               
