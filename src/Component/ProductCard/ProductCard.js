@@ -101,6 +101,7 @@ function ProductCard(props) {
                   })}
               </Carousel>
 
+
               <div className="card-properties">
                     <Card.Title className="card-properties__item item-title">{title}</Card.Title>
                     <Card.Subtitle className="card-properties__item item-location ">{location}</Card.Subtitle>
