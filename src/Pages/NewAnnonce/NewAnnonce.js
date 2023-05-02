@@ -279,7 +279,7 @@ const submitAnnonce = async (event) => {
   console.log("ilk posta numarası", postnum)
   postnum = (postnum !== '' && postnum !== undefined) ? postnum : 0;  
   console.log("ikinci posta numarası", postnum)
-  fetch(`https://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`, 
+  fetch(`https://secure.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`, 
   {method: 'GET'})
   .then(response => response.json())
   .then(data => {
