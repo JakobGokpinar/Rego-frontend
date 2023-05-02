@@ -68,7 +68,7 @@ const Navigation = () => {
                                 <Dropdown.Item href="/mine-annonser"><i className="fa-solid fa-scroll me-2"/> Mine Annonser</Dropdown.Item>
                                 <Dropdown.Item href="/favoritter"><i className="fa-regular fa-heart me-2"/> Favoritter</Dropdown.Item>
                                 <Dropdown.Divider/>
-                                <Dropdown.Item onClick={logout}>Logg Ut</Dropdown.Item>
+                                <Dropdown.Item onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket me-2"/> Logg Ut</Dropdown.Item>
                             </DropdownButton>
                         </Nav>
                           :

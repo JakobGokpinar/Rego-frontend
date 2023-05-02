@@ -272,24 +272,32 @@ const submitAnnonce = async (event) => {
 
  useEffect(() => { 
   var postnum = annoncePropertyObject["postnumber"];
+  console.log("ilk posta numarası", postnum)
   postnum = (postnum !== '' && postnum !== undefined) ? postnum : 0;  
+  console.log("ikinci posta numarası", postnum)
 
   fetch(`http://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`, 
   {method: 'GET'})
   .then(response => response.json())
   .then(data => {
+    console.log("server dan gelen data", data)
       var annonceObj = annoncePropertyObject;
+      console.log("annonce obje guncellemeden once", annonceObj)
       const placeName = data.postalcodes[0];
       const postalcode = placeName ? placeName.adminCode2 : 0;
       const placeProperties = communeFinder(postalcode);
-
+      console.log("place properties", placeProperties)
       if(placeProperties) {
         annonceObj["fylke"] = placeProperties.fylkesNavn;
         annonceObj["kommune"] = placeProperties.kommuneNavn;
         annonceObj["location"] = placeName.placeName;
+      console.log("annonce obje guncellemeden sonra", annonceObj)
         setAnnoncePropertyObject(annonceObj)
       }
+      console.log('place name', placeName)
       setPostAddress(placeName ? placeName.placeName : 'Ugyldig postnummer');
+  }).catch(err => {
+    console.log(err)
   })
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [postNumber])
