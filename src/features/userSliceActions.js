@@ -23,6 +23,9 @@ export const sendSignUpRequest = (user) => {
                 if(responseMsg === 'user created') {
                     const user = response.data.user;
                     dispatch(userActions.login(user))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Bruker ble opprettet'}))
+                } else {
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }
             }).catch(error => {
                 console.log(error)
@@ -37,13 +40,15 @@ export const sendLoginRequest = (user) => {
 
         const handleRequest = async () => {
             instanceAxs.post('/login', user).then(response => {
-
+                console.log(response)
                 const responseMsg = response.data.message;
                 if(responseMsg === 'user logged in') {
                     const user = response.data.user;
                     dispatch(userActions.login(user));
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Logget inn'}))
+                } else {
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }
-
             }).catch(error => {
                 console.log(error)
             })
@@ -56,13 +61,14 @@ export const googleLoginRequest = (credentials) => {
     return async (dispatch) => {
         const handleRequest = async () => {
             instanceAxs.post('/google/auth', credentials).then(response => {
-
                 const responseMsg = response.data.message;
                 if(responseMsg === 'User logged in') {
                     const user = response.data.user;
                     dispatch(userActions.login(user))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Logget inn'}))
+                } else {
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }
-
             }).catch(error => {
                 console.log(error)
             })
@@ -78,6 +84,9 @@ export const logoutRequest = () => {
                 const responseMsg = response.data;
                 if(responseMsg === 'user logged out') {
                     dispatch(userActions.logout())
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: 'Du logget ut'}))
+                } else {
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }
             }).catch(error => {
                 console.log(error)
