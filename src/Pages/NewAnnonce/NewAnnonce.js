@@ -277,7 +277,7 @@ const submitAnnonce = async (event) => {
   console.log("ilk posta numarası", postnum)
   postnum = (postnum !== '' && postnum !== undefined) ? postnum : 0;  
   console.log("ikinci posta numarası", postnum)
-  instanceAxs.get('http://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft')
+  instanceAxs.get(`http://api.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`)
   .then(response => response.json())
   .then(data => {
     console.log("server dan gelen data", data)
