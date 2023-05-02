@@ -50,23 +50,29 @@ const MyAnnonces = () => {
                     <Breadcrumb.Item href='/min-konto'>Min konto</Breadcrumb.Item>
                     <Breadcrumb.Item href='/mine-annonser' active>Mine Annonser</Breadcrumb.Item>
                 </Breadcrumb>
-                <div className='myannonces-content'>
-                    {(annonceArray && annonceArray.length > 0) && annonceArray.map((item, index) => {
-                        return(
-                            <div key={index} className='myannonces-content-product border'>
-                                <img src={item.annonceImages[0].location} className='content-product__img' alt='gg'/>
-                                <div className='content-product__info'>
-                                    <p className='content-product__info__title'>{item.title}</p>
-                                    <p className='content-product__info__price mt-2'>{item.price} kr</p>
-                                    <div className='content-product__info__buttons'>
-                                        <Button className='content-product-control-button'variant='outline-primary' size='sm' onClick={e => makeChangeModalVisible(e, item)}>Endre</Button>
-                                        <Button className='content-product-control-button' variant='outline-danger' size='sm'onClick={e => visibleRemoveModal(e, item)}>Fjern</Button>
+                {(annonceArray && annonceArray.length > 0) ?
+                    <div className='myannonces-content'>
+                        {(annonceArray && annonceArray.length > 0) && annonceArray.map((item, index) => {
+                            return(
+                                <div key={index} className='myannonces-content-product border'>
+                                    <img src={item.annonceImages[0].location} className='content-product__img' alt='gg'/>
+                                    <div className='content-product__info'>
+                                        <p className='content-product__info__title'>{item.title}</p>
+                                        <p className='content-product__info__price mt-2'>{item.price} kr</p>
+                                        <div className='content-product__info__buttons'>
+                                            <Button className='content-product-control-button'variant='outline-primary' size='sm' onClick={e => makeChangeModalVisible(e, item)}>Endre</Button>
+                                            <Button className='content-product-control-button' variant='outline-danger' size='sm'onClick={e => visibleRemoveModal(e, item)}>Fjern</Button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                </div>
+                            )
+                        })}
+                    </div>
+                :
+                    <div className='myannonces-content'>
+                        <p>Du har ingen annonser. Prøv å logge inn og lage ut annonser</p>
+                    </div>
+                }
                 <Modal show={showRemoveModal} onHide={() => setShowRemoveModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Fjern Annonsen</Modal.Title>

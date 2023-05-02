@@ -6,19 +6,19 @@
         },
         {
             "maincategory": "Eindom",
-            "subcategories": ["Rekkehus", "Leilighet"]           
+            "subcategories": ["Rekkehus", "Leilighet", "Hytta", "Enebolig"]           
         },
         {
             "maincategory": "Båt",
-            "subcategories": []     
+            "subcategories": ["Seilbåt", "Daycruiser", "Yacht"]     
         },
         {
             "maincategory": "Motorsykkel",
-            "subcategories": []     
+            "subcategories": ["Scooter", "Moped", "Snøscooter", "ATV"]     
         },
         {
             "maincategory": "Varer",
-            "subcategories": []     
+            "subcategories": ["Møbler", "Mobil", "Hvitevarer", "Briller", "Sko", "Dameklær", "Herreklær"]     
         }
     ]
 }
