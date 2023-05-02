@@ -62,11 +62,11 @@ const Navigation = () => {
                             <DropdownButton id="dropdown-basic-button" title={user.username || user.email || ''} variant="light">
                                 <Dropdown.Item href="min-konto">Min Konto</Dropdown.Item>
                                 <Dropdown.Divider/>
-                                <Dropdown.Item href="/nyannonse">Ny Annonse</Dropdown.Item>
-                                <Dropdown.Item href="/profil">Min Profil</Dropdown.Item>
-                                <Dropdown.Item href="#">Meldinger</Dropdown.Item>
-                                <Dropdown.Item href="/mine-annonser">Mine Annonser</Dropdown.Item>
-                                <Dropdown.Item href="/favoritter">Favoritter</Dropdown.Item>
+                                <Dropdown.Item href="/nyannonse"><i className="fa-solid fa-plus me-2"/> Ny Annonse</Dropdown.Item>
+                                <Dropdown.Item href="/profil"><i className="fa-regular fa-user me-2"/> Min Profil</Dropdown.Item>
+                                <Dropdown.Item href="#"><i className="fa-regular fa-message me-2"/> Meldinger</Dropdown.Item>
+                                <Dropdown.Item href="/mine-annonser"><i className="fa-solid fa-scroll me-2"/> Mine Annonser</Dropdown.Item>
+                                <Dropdown.Item href="/favoritter"><i className="fa-regular fa-heart me-2"/> Favoritter</Dropdown.Item>
                                 <Dropdown.Divider/>
                                 <Dropdown.Item onClick={logout}>Logg Ut</Dropdown.Item>
                             </DropdownButton>

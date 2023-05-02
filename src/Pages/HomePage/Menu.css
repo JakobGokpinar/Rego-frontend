@@ -1,3 +1,15 @@
+.mainmenu-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 50px;
+}
+
+.mainmenu-container__item {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 
 .product-column {
   display: flex;

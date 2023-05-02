@@ -135,7 +135,7 @@ const Filters = ({handleFilterChange, removeSelectedFilter, searchParams, counti
     <div>
       <Accordion className="filter-accordion">
         <Accordion.Item>
-          <Accordion.Header>Location</Accordion.Header>
+          <Accordion.Header>Lokasjon</Accordion.Header>
           <Accordion.Body>
             <Form.Select
               aria-label="state-selection"
@@ -143,7 +143,7 @@ const Filters = ({handleFilterChange, removeSelectedFilter, searchParams, counti
               onChange={handleStateChange}
               value={state}
             >
-              <option value="">Valg en Fylke</option>
+              <option value="">Velg en Fylke</option>
               {counties.length > 0 &&
                 counties.map((county) => {
                   return (
@@ -182,7 +182,7 @@ const Filters = ({handleFilterChange, removeSelectedFilter, searchParams, counti
 
       <Accordion className="filter-accordion">
         <Accordion.Item>
-          <Accordion.Header>Category</Accordion.Header>
+          <Accordion.Header>Kategori</Accordion.Header>
           <Accordion.Body>
             <Form.Select aria-label="maincategory-selection" className="mb-2" onChange={handleCategoryChange} value={mainCategory !== '' && JSON.stringify(mainCategory)}>
             <option value={JSON.stringify('')}>Velg en hovedkategori</option>
@@ -243,7 +243,7 @@ const Filters = ({handleFilterChange, removeSelectedFilter, searchParams, counti
 
       <Accordion className="filter-accordion">
         <Accordion.Item>
-          <Accordion.Header>Date</Accordion.Header>
+          <Accordion.Header>Dato</Accordion.Header>
           <Accordion.Body>
             <Form onChange={handleDateChange}value={productDate}>
               <Form.Check
