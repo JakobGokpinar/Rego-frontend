@@ -29,7 +29,7 @@ function ProductCard(props) {
   ];
 
   const shortDesc = description.slice(0, 34);
-  const siteLink = 'https://rego.onrender.com'; // http://localhost:3000
+  const siteLink = 'https://www.rego.live'; // http://localhost:3000
 
   const dispatch = useDispatch();
   const [isHovered, setHovered] = useState(false);

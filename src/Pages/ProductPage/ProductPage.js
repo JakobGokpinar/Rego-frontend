@@ -26,7 +26,7 @@ import { addToFavorites, removeFromFavorites } from "../../features/userSliceAct
 function ProductPage() {
 
     let { annonceId } = useParams();
-    const siteLink = 'https://rego.onrender.com';
+    const siteLink = 'https://www.rego.live';
     
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
@@ -159,7 +159,7 @@ function ProductPage() {
                                         </Modal>
                                     </div>
 
-                                    <p className="annonce-product-title mb-5">BMW X5</p>
+                                    <p className="annonce-product-title mb-5">{annonce.title}</p>
 
                                     <div className="annonce-content-box">
                                         <p className="annonce-content-heading">Description</p>

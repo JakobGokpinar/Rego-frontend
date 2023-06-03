@@ -28,6 +28,7 @@
   max-width: 450px;
 }
 
+/* on phones */
 @media (max-width: 768px) {
   .login__bg {
     display: none;

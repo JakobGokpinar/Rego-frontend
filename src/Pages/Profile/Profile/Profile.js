@@ -106,9 +106,9 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <Breadcrumb>
-        <Breadcrumb.Item href="/profil">My profile</Breadcrumb.Item>
+        <Breadcrumb.Item href="/min-konto">Min Konto</Breadcrumb.Item>
         <Breadcrumb.Item href="/profile" active>
-          Profile
+          Profil
         </Breadcrumb.Item>
       </Breadcrumb>
 

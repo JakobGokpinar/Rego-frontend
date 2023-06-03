@@ -2,7 +2,7 @@ import axios from "axios";
 // https://rego-api.onrender.com
 //http://localhost:3080/
 
-const serverURL = "https://rego-api.onrender.com";
+const serverURL = "http://localhost:3080/";
 const userApi = "user";
 const fileApi = "file";
 

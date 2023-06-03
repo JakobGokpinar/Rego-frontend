@@ -194,7 +194,7 @@ const submitAnnonce = async (event) => {
   }
 }
 
- const onImageChange = async (event) => {
+ const  onImageChange = async (event) => {
   if(!event.target.files) return;   //target.files seçilen dosyaları döner
 
   // Array.from() target.files'ı iterable bir array'e dönüştürür
