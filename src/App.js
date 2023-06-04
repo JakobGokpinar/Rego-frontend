@@ -68,8 +68,8 @@ const App = () => {
                 <Route path='/profil' element={<Profile/>}/>
                 <Route  path='/search' element={<SearchResult/>}/>
                 <Route path={'/produkt/:annonceId'} element={<ProductPage/>}/>
-                <Route path='/privacy-policy' element={PrivacyPolicy}></Route>
-                <Route path='/about-us' element={AboutUs}></Route>
+                <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
+                <Route path='/about-us' element={<AboutUs/>}></Route>
                 <Route path="*" element={<NotFound/>}/>
         </Routes>
         <Footer></Footer>
