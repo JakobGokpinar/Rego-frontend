@@ -12,6 +12,8 @@ import Register from './Pages/LoginAndRegister/Register.js';
 import ProductPage from './Pages/ProductPage/ProductPage.js';
 import SearchResult from './Pages/SearchedResultPage/SearchResult.js';
 import Account from './Pages/Profile/Profile.js';
+import PrivacyPolicy from './Pages/PrivacyAndAbout/PrivacyPolicy.js';
+import AboutUs from './Pages/PrivacyAndAbout/AbousUs.js';
 import NotFound from './Pages/NotFound.js';
 import NewAnnonce from './Pages/NewAnnonce/NewAnnonce.js';
 import Favorites from './Pages/Profile/Favorites/Favorites.js';
@@ -66,6 +68,8 @@ const App = () => {
                 <Route path='/profil' element={<Profile/>}/>
                 <Route  path='/search' element={<SearchResult/>}/>
                 <Route path={'/produkt/:annonceId'} element={<ProductPage/>}/>
+                <Route path='/privacy-policy' element={PrivacyPolicy}></Route>
+                <Route path='/about-us' element={AboutUs}></Route>
                 <Route path="*" element={<NotFound/>}/>
         </Routes>
         <Footer></Footer>

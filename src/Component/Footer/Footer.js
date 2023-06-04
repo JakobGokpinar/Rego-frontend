@@ -31,8 +31,8 @@ const Footer = () => {
                       <Col  className='footer-col footer-quicklinks'lg={4} md={4} sm={12}>
                           <p className='footer-heading'> Quick Links</p>
                           <div className='footer-content'>
-                              <a href='/#'>Privacy Policy</a>
-                              <a href='/#'>About Us</a>
+                              <a href='/privacy-policy'>Privacy Policy</a>
+                              <a href='/about-us'>About Us</a>
                           </div>
                       </Col>
                       <Col className='footer-col footer-useractions'lg={4} md={4} sm={12}>
