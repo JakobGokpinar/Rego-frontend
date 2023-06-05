@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import ProductCard from '../../Component/ProductCard/ProductCard.js';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col'
 import { instanceAxs } from '../../config/api.js';
 import "./Menu.css";
 import '../../main.css';
