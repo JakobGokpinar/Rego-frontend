@@ -15,6 +15,7 @@ import { uiSliceActions } from '../../features/uiSlice';
 
 
 function Register() {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -51,9 +52,13 @@ function Register() {
     //başka bir tür fonnksiyon olsaydı ana fonksiyonun dışında tanımlanırdı.
     const handleSubmit = (event) => {
         event.preventDefault();
-        //on deployment
+
         if(validator.isEmail(email) === false) {
-          console.log('email is invalid')
+          dispatch(uiSliceActions.setFeedbackBanner({ 
+            severity: 'error',
+            msg: 'Please provide a valid email address'
+          }))
+          return;
         }
 
         setIsloading(true)
@@ -93,7 +98,6 @@ function Register() {
                         </Col>
                     </Row>
                    
-
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
@@ -111,7 +115,9 @@ function Register() {
                     type="password"
                     name="password"
                     onChange={e => setPassword(e.target.value)}
-                    required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,32}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and be between 6 and 32 characters"
+                    required  
                   />
                 </Form.Group>
                 <Form.Group
@@ -123,7 +129,6 @@ function Register() {
                       <Spinner
                         size="sm"
                         className="me-2"
-                        animation="grow"
                         as="div"
                         aria-hidden="true"
                       ></Spinner>

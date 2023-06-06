@@ -5,8 +5,10 @@ import './Footer.css';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 
-import logo from "../../utils/Rego.png"
+import logo from "../../utils/Rego.png";
+
 const Footer = () => {
+
   const [isRender, setIsRender] = useState(true)
   const location = useLocation();
 
@@ -21,9 +23,9 @@ const Footer = () => {
   },[])   
 
   return (
-    <div>
+    <div className='footer-container'>
       {isRender && 
-              <div className='footer-container bg-light'>
+              <div className='footer-div bg-light'>
                   <Row className='footer-row'>
                       <Col className='footer-col footer-brand-and-logo'lg={4} md={4} sm={12}>
                           <img alt='logo' src={logo} className='footer-brand-logo'/>

@@ -23,7 +23,7 @@ export const sendSignUpRequest = (user) => {
                 if(responseMsg === 'user created') {
                     const user = response.data.user;
                     dispatch(userActions.login(user))
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Bruker ble opprettet'}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen, ${user.name}`}))
                 } else {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }
@@ -45,7 +45,7 @@ export const sendLoginRequest = (user) => {
                 if(responseMsg === 'user logged in') {
                     const user = response.data.user;
                     dispatch(userActions.login(user));
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Logget inn'}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen tilbake, ${user.name}`}))
                 } else {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
                 }

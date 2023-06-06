@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './MyAnnonces.css';
-import '../../../main.css';
 
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Button from 'react-bootstrap/Button';
@@ -45,7 +44,7 @@ const MyAnnonces = () => {
     }, [user])
     
         return(
-            <div className='myannonces-container page-container'>
+            <div className='myannonces-container'>
                 <Breadcrumb>
                     <Breadcrumb.Item href='/min-konto'>Min konto</Breadcrumb.Item>
                     <Breadcrumb.Item href='/mine-annonser' active>Mine Annonser</Breadcrumb.Item>

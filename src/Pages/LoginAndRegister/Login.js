@@ -34,9 +34,10 @@ const Login = () => {
   };
 
   const handleGoogleAuth = (credentialResponse) => {
-    dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', 
-    msg: 'Google Service is currently under development. Please use your email to login'
-  }))
+    dispatch(uiSliceActions.setFeedbackBanner({
+      severity: 'info', 
+      msg: 'Google Service is currently under development. Please use your email to login'
+    }))
   return;
     dispatch(
       googleLoginRequest({
@@ -82,10 +83,8 @@ const Login = () => {
                     <Spinner
                       size="sm"
                       className="me-2"
-                      animation="grow"
                       as="div"
                       aria-hidden="true"
-
                     ></Spinner>
                     Logger Inn...
                   </Button>

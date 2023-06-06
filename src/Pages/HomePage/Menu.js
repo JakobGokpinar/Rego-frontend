@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import ProductCard from '../../Component/ProductCard/ProductCard.js';
 import { instanceAxs } from '../../config/api.js';
 import "./Menu.css";
-import '../../main.css';
 import { useSelector } from 'react-redux';
 
 const Menu = () => {
@@ -23,7 +22,7 @@ const Menu = () => {
     }, [user])
     
         return(
-            <Container fluid className='mainmenu-container page-container'>
+            <Container fluid className='mainmenu-container'>
                 <div className='mainmenu-content'>
                     {productArray.length > 0 && productArray.map((product, index) => {
                         return(   
