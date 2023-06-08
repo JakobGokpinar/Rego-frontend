@@ -19,7 +19,7 @@ const NotFound = () => {
                     </div>
                 </Col>
                 <Col lg={6} >
-                    <img src={gif} className='notFound-gif'/>             
+                    <img src={gif} className='notFound-gif' alt='foundy'/>             
                 </Col>
             </Row>
         </div>

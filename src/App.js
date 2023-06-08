@@ -58,21 +58,23 @@ const App = () => {
           <Navbar ></Navbar>
         </div>
         <div className='app-div'>
-          <Routes>
-                <Route path='/login' element={<Login/>}/>
-                  <Route path="/register" element={<Register/>}></Route>
-                  <Route path='/' element={<Menu/>}/>
-                  <Route path='/min-konto' element={<Account/>}/>
-                  <Route path='/favoritter' element={<Favorites/>}/>
-                  <Route path='/mine-annonser' element={<MyAnnonces/>}/>
-                  <Route path='/nyannonse' element={<NewAnnonce/>}/>
-                  <Route path='/profil' element={<Profile/>}/>
-                  <Route  path='/search' element={<SearchResult/>}/>
-                  <Route path={'/produkt/:annonceId'} element={<ProductPage/>}/>
-                  <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
-                  <Route path='/about-us' element={<AboutUs/>}></Route>
-                  <Route path="*" element={<NotFound/>}/>
-          </Routes>
+          <div className='app-div__content'>
+            <Routes>
+                  <Route path='/login' element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}></Route>
+                    <Route path='/' element={<Menu/>}/>
+                    <Route path='/min-konto' element={<Account/>}/>
+                    <Route path='/favoritter' element={<Favorites/>}/>
+                    <Route path='/mine-annonser' element={<MyAnnonces/>}/>
+                    <Route path='/nyannonse' element={<NewAnnonce/>}/>
+                    <Route path='/profil' element={<Profile/>}/>
+                    <Route  path='/search' element={<SearchResult/>}/>
+                    <Route path={'/produkt/:annonceId'} element={<ProductPage/>}/>
+                    <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
+                    <Route path='/about-us' element={<AboutUs/>}></Route>
+                    <Route path="*" element={<NotFound/>}/>
+            </Routes>
+          </div>
           <Footer></Footer>
         </div>
      </Router>
