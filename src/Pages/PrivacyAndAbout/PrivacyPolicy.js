@@ -90,8 +90,8 @@ const PrivacyPolicy = () => {
 
             <p>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.</p>
 
-            <p>Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info">Privacy Policy Generator</a>.</p>
-
+{/*             <p>Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info">Privacy Policy Generator</a>.</p>
+ */}
             <h4>Contact Us</h4>
 
             <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</p>
