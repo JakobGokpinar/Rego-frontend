@@ -11,6 +11,9 @@ import Spinner from 'react-bootstrap/Spinner';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip';
+import Popover from 'react-bootstrap/Popover';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Backdrop from '@mui/material/Backdrop';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -149,29 +152,27 @@ const submitAnnonce = async (event) => {
       specialProps.push(item)
     }
   })
-
   var annonceProperties = annoncePropertyObject;
   annonceProperties["specialProperties"] = specialProps;
-
   if(isModifyAnnonce) {
     try {
       const formData = await convertImagesToFormData();
       const annonceId = annoncePropertyObject["_id"];
       const annonceproperties = annonceProperties;
-
-      await instanceAxs.post('/newannonce/remove/annonceimages', {annonceId})
-      
+      const res = await instanceAxs.post('/newannonce/remove/annonceimages', {annonceId})
+      console.log('res', res)
       const result = await instanceAxs.post(`/newannonce/imageupload?annonceid=${annonceId}`, formData);
+      console.log('result', result)
       var copyImages = imageArray;
       var returnedImages = result.data.files;
       for (let img of copyImages) {
         img.location = returnedImages.find(item => 
           item.originalname === img.name).location;
       }
-
       const response = await instanceAxs.post('/newannonce/update', {annonceImages: copyImages, annonceproperties, annonceId})
+      console.log('response', response)
       if(response.status !== 200) {
-        dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: 'Annonsen kunne ikke oppdateres'}));
+        dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke oppdateres'}));
         setIsPublishing(false);
       } else {
         dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Annonsen ble oppdatert'}));
@@ -183,7 +184,7 @@ const submitAnnonce = async (event) => {
       }
     } catch (error) {
         console.log(error)
-        dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: 'Annonsen kunne ikke oppdateres'}));
+        dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke oppdateres'}));
         setIsPublishing(false);
     }
   } else {
@@ -331,17 +332,28 @@ const submitAnnonce = async (event) => {
               <Row style={{margin: 0}}>
                 <Col className="newannonce-col input-col border" lg={4}md={6}>
                       <Form onSubmit={submitAnnonce}>
-
                           <Form.Group className="newannonce-form-group">
                               <Form.Label>Tittel</Form.Label>
-                              <Form.Control type="text" id='title' name="title" value={annoncePropertyObject["title"]} required 
-                                  onChange={handlePropertyChange}  disabled={isPublishing}>
-                              </Form.Control>
+                              <div className="form-group__content">
+                                  <Form.Control type="text" id='title' name="title" 
+                                      value={annoncePropertyObject["title"]} required 
+                                      onChange={handlePropertyChange}  disabled={isPublishing}
+                                    />
+                                    <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              Tittel er en kort beskrivelse av produktet ditt. Hold det enkelt og fengende og bruk nøkkelfunksjoner av produktet (f.eks. årsmodell eller merke hvis det er en bil). Begynn å skrive for å se endringer.
+                                          </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
+                              </div>                       
                           </Form.Group>
 
                           <Form.Group className="newannonce-form-group">
                               <Form.Label>Pris</Form.Label>
-                              <div className="d-flex align-items-center">
+                              <div className="d-flex align-items-center justify-content-space-between">
                                   <Form.Control type="number" id="price" className="me-3" value={annoncePropertyObject["price"]} required 
                                       onChange={handlePropertyChange}  disabled={isPublishing}
                                   />
@@ -353,11 +365,21 @@ const submitAnnonce = async (event) => {
                                       <option value="per uke">Per uke</option>
                                       <option value="per måned">Per måned</option>
                                   </Form.Select>
+                                  <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              Gi en pris i NOK til produktet ditt. Velg deretter en tidsramme om det er total-, dags-, ukentlig eller månedlig pris.
+                                          </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
                               </div>
                           </Form.Group>
 
                           <Form.Group className="newannonce-form-group" onChange={handlePropertyChange}>
                               <Form.Label>Hoved Kategori</Form.Label>
+                              <div className="form-group__content">
                               <Form.Select id="category" required value={JSON.stringify(selectedMainCat)}
                                   onChange={handlePropertyChange} disabled={isPublishing}>
                                     <option value={JSON.stringify('')}>Velg en hovedkategori</option>
@@ -369,11 +391,24 @@ const submitAnnonce = async (event) => {
                                         })
                                       }
                               </Form.Select>
+                              <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              Velg en hovedkategori for produktet ditt. Vi har mange 
+                                              forskjellige kategorier, så sørg for at du velger den mest relevante. 
+                                              Det hjelper å målrette potensielle kjøpere mer presist.                                          
+                                          </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
+                              </div>
                           </Form.Group>
 
                           {selectedMainCat !== '' && 
                               <Form.Group className="newannonce-form-group">
                                   <Form.Label>Under Kategori</Form.Label>
+                                  <div className="form-group__content">
                                   <Form.Select id="subCategory" required value={annoncePropertyObject["subCategory"]}
                                       onChange={handlePropertyChange} disabled={isPublishing}>
                                         <option value={JSON.stringify('')}>Velg en under kategori</option>
@@ -384,14 +419,37 @@ const submitAnnonce = async (event) => {
                                         })
                                         }
                                   </Form.Select>
+                                  <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              Du er ett skritt nærmere ditt største salg! Velg en underkategori for å få mer seriøse kunder.
+                                          </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
+                                  </div>
                               </Form.Group>
                           }
 
                           <Form.Group className="newannonce-form-group">
                               <Form.Label>Bilder</Form.Label>
+                              <div className="form-group__content">
                               <Form.Control type="file" accept="image/*" multiple 
                                   onChange={onImageChange}disabled={isPublishing}
                               />
+                                                              <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                            Bilder er den beste måten å vise hvor flott produktet ditt er! 
+                                            Sørg for at du har noen bilder som representerer de gode egenskapene til produktet 
+                                            sammen med å vise riper eller feil hvis det finnes.                                          
+                                        </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
+                                    </div>
                           </Form.Group>
 
                           <div className="review-product-images-small-div newannonce-form-group">
@@ -426,14 +484,27 @@ const submitAnnonce = async (event) => {
 
                           <Form.Group className="newannonce-form-group">
                               <Form.Label>Produkt Beskrivelse</Form.Label>
+                              <div className="form-group__content">
                               <Form.Control as="textarea" name="productDescription" 
                                     id='description' value={annoncePropertyObject["description"]} rows={6}
                                     onChange={handlePropertyChange} disabled={isPublishing} required
                               />
+                                                              <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              En velskrevet beskrivelse er en god måte å overtale kjøpere 
+                                              og selge produktet på. Du kan skrive så detaljert som du vil. 
+                                              Sørg for at du inkluderer både gode poengene og ulempene med produktet ditt.                                          </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
+                                    </div>
                           </Form.Group>
 
                           <Form.Group className="newannonce-form-group">
                               <Form.Label>Status</Form.Label>
+                              <div className="form-group__content">
                               <Form.Check 
                                   type="radio" value="nytt" name="status" checked={annoncePropertyObject["status"] === 'nytt'}
                                   id="status" label="Nytt" onChange={handlePropertyChange} disabled={isPublishing}
@@ -442,11 +513,39 @@ const submitAnnonce = async (event) => {
                                   type="radio" value="brukt" name="status" checked={annoncePropertyObject["status"] === 'brukt'}
                                   id="status" label="Brukt" onChange={handlePropertyChange} disabled={isPublishing}
                                 />
+                                                                <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              Velg om produktet ditt er helt nytt eller brukt fra før.                                          
+                                          </Tooltip>
+                                          }
+                                        >
+                                        <i className="fa-solid fa-circle-question mx-3"/>
+                                    </OverlayTrigger>
+                                    </div>
                           </Form.Group>
 
                           <Form.Group className="newannonce-form-group" style={{display: 'flex', flexDirection: 'column'}}>
                               <Form.Label>Nokkelinfo</Form.Label>
-                              <Button variant="outline-success" type='button' onClick={() => setShowBackdrop(true)} disabled={isPublishing}><i className="fa-solid fa-plus mx-2"/> Legg til ny nokkelinfo</Button>
+                              <div className="form-group__content">
+                              <Button variant="outline-primary w-100" type='button' onClick={() => setShowBackdrop(true)} disabled={isPublishing}><i className="fa-solid fa-plus mx-2" /> Legg til ny nokkelinfo</Button>
+                              <OverlayTrigger placement="right"
+                                      overlay={
+                                          <Tooltip>
+                                              Legg til raske fakta om produktet ditt. 
+                                              Som for eksempel girtype eller årsmodell hvis det er en bil, 
+                                              størrelse hvis det er et tøy eller kvadratmeter hvis det er en bolig. 
+                                              En meny vil dukke opp når du klikker på den blå knappen og der kan du
+                                              kan skrive overskrift (f. eks. Girkasse) og input (Manuel). 
+                                              På denne måten kan brukere fange de viktigste punktene uten å lese 
+                                              hele beskrivelsen. Du kan legge til så mange av disse du vil, 
+                                              men sørg for at de er de viktigste partene av produktet. 
+                                              For å fjerne den, hold markøren over eller klikk på.                                          
+                                            </Tooltip>
+                                          }
+                                        > 
+                                        <i className="fa-solid fa-circle-question  mx-3"/>
+                                    </OverlayTrigger>
                               <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                                                   open={showBackdrop}
                                                   >
@@ -465,10 +564,12 @@ const submitAnnonce = async (event) => {
                                                   >
                                                     <Form.Control type="text" id="value" name="val" placeholder="name@example.com" onChange={e => setSpecPropVal(e.target.value)}/>
                                                 </FloatingLabel>
-                                                <Button variant="outline-success" type='button' className="w-100 mt-5" onClick={insertSpecialProp}><i className="fa-solid fa-plus mx-2"/>Legg til nokkelinfo</Button>
-                                                <Button variant="outline-primary" type='button' className="mt-2" onClick={() => setShowBackdrop(false)}>Lukk</Button>
+                                                <Button variant="outline-primary" type='button' className="w-100 mt-5" onClick={insertSpecialProp}><i className="fa-solid fa-plus mx-2"/>Legg til nokkelinfo</Button>
+                                                <Button variant="outline-dark" type='button' className="mt-2" onClick={() => setShowBackdrop(false)}>Lukk</Button>
                                       </div>
                               </Backdrop>
+                              </div>
+
                           </Form.Group>
 
                           <Form.Group className="newannonce-form-group">

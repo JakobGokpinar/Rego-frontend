@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./NewProductCard.css";
 
@@ -32,6 +32,7 @@ function ProductCard(props) {
   const siteLink = 'https://www.rego.live'; // http://localhost:3000
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isHovered, setHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -75,8 +76,14 @@ function ProductCard(props) {
   }
 
   const sendMessageAlert = event => {
-    event.preventDefault()
-    dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: 'Å sende melding til selleren kommer snart.'}));
+    event.preventDefault();
+    if(props?.user?._id === props?.sellerId) return;
+    navigate('/chat', {   
+      state: { 
+        buyer: props?.user?._id,  
+        seller: props?.sellerId,
+        product_id: props?.id
+      }})
   }
 
 
@@ -126,7 +133,7 @@ function ProductCard(props) {
                             </Button>
                       </OverlayTrigger>
                   }
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Coming soon</Tooltip>}>
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Send en melding til selleren</Tooltip>}>
                       <Button variant="outline-primary" type="button" onClick={sendMessageAlert}> 
                           Send Melding <i className="fa-regular fa-message"/>
                       </Button>

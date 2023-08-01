@@ -50,7 +50,7 @@ export default function Searchbar() {
     <div>
             <Form action='/search'>
                 <InputGroup>
-                        <Form.Control name='q' type='search' placeholder='Søk...' 
+                        <Form.Control name='q' type='search' placeholder='Søk produkt eller kategori' 
                             style={{width: 250}} onChange={handleInput} autoComplete='off'
                         />
                         <Button type='search'> 
@@ -86,41 +86,20 @@ export default function Searchbar() {
                             </div>
                     }
 
-                    {suggestedCategories.length > 0 &&
-                        suggestedCategories.filter(item => 
-                            item !== null && item !== undefined
-                        )
-                            .map((item, index) => {
-                                    return(
-                                        <div className='suggestion-component' key={index} onClick={handleLinkClick}>
-                                            <p className='suggestion-component__title'>Kategori</p>
-                                            <Link to={`search?category=${item}`}>
+                    {suggestedCategories.length > 0 &&       
+                            <div id='searchProduct' className='suggestion-component'>
+                                    <p className='suggestion-component__title'>Kategorier</p>
+                                    {suggestedCategories.filter(item => item !== null && item !== undefined).map((item, index) => {
+                                        return(
+                                            <Link to={`search?category=${item}`} key={index} onClick={handleLinkClick}>
                                                 <div className='category-suggestion-component__content'>
                                                     {item}
                                                 </div>
                                             </Link>
-                                        </div>
-                                    )
-                            })
-                    }
-
-                    {suggestedSubCategories.length > 0 &&
-                        suggestedSubCategories.filter(item => 
-                            item !== null && item !== undefined
-                        )
-                            .map(item => {
-                                return(
-                                    <div className='suggestion-component' key={item} onClick={handleLinkClick}>
-                                        <p className='suggestion-component__title'>Kategori</p>
-                                        <Link to={`search?subcategory=${item}`}>
-                                                <div className='category-suggestion-component__content'>
-                                                    {item}
-                                                </div>
-                                            </Link>
-                                    </div>
-                                )                                             
-                            })
-                    }          
+                                        )
+                                    })}
+                            </div>
+                    }        
                 </div>     
             }
     </div>

@@ -30,6 +30,7 @@ const Login = () => {
     const password = event.target[1].value;
     setTimeout(() => {
       dispatch(sendLoginRequest({ email, password }));
+      setIsloading(false)
     }, 1000);
   };
 
@@ -62,6 +63,7 @@ const Login = () => {
                 <Form.Control
                   type="email"
                   name="email"
+                  disabled={isLoading === true}
                   required
                 />
               </Form.Group>
@@ -71,6 +73,7 @@ const Login = () => {
                 <Form.Control
                   type="password"
                   name="password"
+                  disabled={isLoading}
                   required
                 />
               </Form.Group>
@@ -85,6 +88,7 @@ const Login = () => {
                       className="me-2"
                       as="div"
                       aria-hidden="true"
+                      disabled={isLoading}
                     ></Spinner>
                     Logger Inn...
                   </Button>

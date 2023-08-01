@@ -36,6 +36,8 @@ const Menu = () => {
                                     location={product.location}
                                     description={product.description}
                                     isFavorite={product.isFavorite}
+                                    user={user}
+                                    sellerId={product.sellerId}
                                 ></ProductCard>
                             </div>                                    
                         )

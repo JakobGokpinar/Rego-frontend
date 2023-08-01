@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import socket from '../config/socket';
 
 const userSlice = createSlice({
     name: 'user',
@@ -8,10 +9,12 @@ const userSlice = createSlice({
     },
     reducers: {
         login(state, action) {
+            if(!action.payload) return;
             state.user = action.payload;
             state.isLoggedIn = true;
             const date = new Date();
             const expiry = date.getTime() + (1000 * 60 * 60 * 24 * 30)
+            socket.emit('addUser', action.payload._id)
             window.localStorage.setItem('expiry', expiry)
             window.localStorage.setItem('user', JSON.stringify(action.payload));
             window.localStorage.setItem('isLoggedIn', true);
@@ -19,6 +22,7 @@ const userSlice = createSlice({
         logout(state) {
             state.user = {};
             state.isLoggedIn = false;
+            socket.emit('logout')
             window.localStorage.removeItem('user');
             window.localStorage.removeItem('isLoggedIn');
             window.localStorage.removeItem('expiry');

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 import TextareaAutosize from 'react-textarea-autosize';
@@ -22,19 +22,29 @@ import Spinner from "react-bootstrap/Spinner";
 import { useDispatch } from "react-redux";
 import { uiSliceActions } from "../../features/uiSlice.js";
 import { addToFavorites, removeFromFavorites } from "../../features/userSliceActions.js";
+import { format } from "timeago.js";
+import socket from "../../config/socket.js";
 
 function ProductPage() {
-
     let { annonceId } = useParams();
+    let navigate = useNavigate();
     const siteLink = 'https://www.rego.live';
     
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const [annonce, setAnnonce] = useState('');
-    const [seller, setSeller] = useState({username: '', userDate: '', profilepicture: ''})
+    const [seller, setSeller] = useState(null)
     const [isLoading, setLoading] = useState(true);
     const [showSpinner, setShowSpinner] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
+    const [sellerStatus, setSellerStatus] = useState(null);
+    const [connectedUsers, setConnectedUsers] = useState(null);
+
+    useEffect(() => {
+        socket.on('getUsers', data => {
+          setConnectedUsers(data)
+        })
+      }, [])
 
     const findProduct = useCallback( async () => {
         await instanceAxs.get(`/product?id=${annonceId}`)
@@ -42,19 +52,36 @@ function ProductPage() {
                 if (respond.status !== 200) {
                     setLoading(false)
                     return;
-                }
-                let owner = respond.data.seller;
-                let date = new Date(owner.userDate);
-
+                }                
                 setAnnonce(respond.data.product);
-                setSeller({username: owner.username, userDate: date.getFullYear(), profilepicture: owner.userProfilePicture})
-                setLoading(false)
+                setSeller(respond.data.seller)
             })   
             .catch(err => {
                 console.log(err);
             })   
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
+
+    useEffect(() => {
+        if(!connectedUsers || !user || !seller) return;
+        let connectedFriend = connectedUsers?.find(user => user.userId === seller._id)
+        if(connectedFriend) {
+          setSellerStatus('Active now')
+        } else {
+          setSellerStatus(format(seller?.lastActiveAt))
+        }
+    }, [user, seller, connectedUsers, annonce, isLoading])
+    
+    const sendMessage = event => {
+        event.preventDefault();
+        if(user?._id === seller?._id || !user || !seller || !annonce) return;
+        navigate('/chat', {   
+          state: { 
+            buyer: user._id,  
+            seller: seller._id,
+            product_id: annonce._id
+          }})
+      }
 
     const handleAddToFavorites = () => {
         setShowSpinner(true)
@@ -151,7 +178,7 @@ function ProductPage() {
                                             </Modal.Header>
                                             <Modal.Body>
                                                 <p>Vil du dele denne annonsen?</p>
-                                                <Form.Control type="text" className="mb-3" value={`http://localhost:3000/produkt/${annonceId}`} disabled/>
+                                                <Form.Control type="text" className="mb-3" value={`${siteLink}/produkt/${annonceId}`} disabled/>
                                                 <Button type='button' variant="outline-primary" className="mb-2" onClick={copyAnnonceLink}>
                                                     Kopier Lenken
                                                 </Button>
@@ -194,12 +221,12 @@ function ProductPage() {
                         </Col>
                         <Col lg={4} className='productPage-seller-col'>
                                 <div className="seller-panel">
-                                        <Avatar className="seller-avatar" src={seller.profilepicture} alt='avatar'sx={{width: '128px', height: '128px'}}/>
+                                        <Avatar className="seller-avatar" src={seller?.profilePicture} alt='avatar'sx={{width: '128px', height: '128px'}}/>
                                         <div className="seller-information">
-                                            <p className="seller-username">{seller.username}</p>
-                                            <p className="seller-subinfo mb-5">Bruker siden {seller.userDate}</p>
-                                            <p className="seller-lastactive mt-4 mb-2">Last active 23 min ago</p>
-                                            <Button variant="primary"><i className="fa-solid fa-envelope me-2"/> Send Melding</Button>
+                                            <p className="seller-username">{seller?.username}</p>
+                                            <p className="seller-subinfo mb-5">Bruker siden {new Date(seller?.userCreatedAt).getFullYear()}</p>
+                                            <p className="seller-lastactive mt-4 mb-2">{sellerStatus === 'Active now' ? <><Spinner animation="grow" variant="success" size="sm"/> Active Now</> : sellerStatus}</p>
+                                            <Button variant="primary" onClick={sendMessage}><i className="fa-solid fa-envelope me-2"/> Send Melding</Button>
                                         </div>
                                 </div>
                         </Col>

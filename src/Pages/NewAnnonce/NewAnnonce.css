@@ -9,6 +9,12 @@
 .newannonce-form-group {
   margin-bottom: 60px;
 }
+.form-group__content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .review-product-images-small-div {
   margin: 0px 20px 60px 10px;

@@ -33,6 +33,7 @@ const FeedbackBanner = () => {
     <div className="feedback-div">
       <Collapse in={showBanner} className="feedback-banner">
         <Alert
+          variant="filled"
           severity={bannerSeverity}
           action={
             <IconButton

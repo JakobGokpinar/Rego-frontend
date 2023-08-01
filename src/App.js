@@ -11,6 +11,7 @@ import Menu from './Pages/HomePage/Menu.js';
 import Login from './Pages/LoginAndRegister/Login.js';
 import Register from './Pages/LoginAndRegister/Register.js';
 import ProductPage from './Pages/ProductPage/ProductPage.js';
+import Chat from './Pages/Chat/Chat';
 import SearchResult from './Pages/SearchedResultPage/SearchResult.js';
 import Account from './Pages/Profile/Profile.js';
 import PrivacyPolicy from './Pages/PrivacyAndAbout/PrivacyPolicy.js';
@@ -27,10 +28,10 @@ import { fetchNorwayDistricts } from './features/appDataSliceActions.js';
 
 const App = () => {
   const dispatch = useDispatch();
+  const user = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect(() => {
     const isLoggedIn = JSON.parse(window.localStorage.getItem('isLoggedIn'));
-    const user = JSON.parse(window.localStorage.getItem('user'));
     const expiry = JSON.parse(window.localStorage.getItem('expiry'));
     const date = new Date();
 
@@ -50,7 +51,7 @@ const App = () => {
     dispatch(fetchNorwayDistricts());
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
+
     return (
       <GoogleOAuthProvider clientId='1011630835579-od6btk63gd1bio6bk413r76mh6q0s9s8.apps.googleusercontent.com'>
      <Router>
@@ -70,6 +71,7 @@ const App = () => {
                     <Route path='/profil' element={<Profile/>}/>
                     <Route  path='/search' element={<SearchResult/>}/>
                     <Route path={'/produkt/:annonceId'} element={<ProductPage/>}/>
+                    <Route  path='/chat' element={<Chat/>}/>
                     <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
                     <Route path='/about-us' element={<AboutUs/>}></Route>
                     <Route path="*" element={<NotFound/>}/>

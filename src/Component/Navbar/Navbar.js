@@ -9,23 +9,69 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutRequest } from "../../features/userSliceActions";
 import Avatar from '@mui/material/Avatar';
 import Searchbar from "./Searchbar";
+import socket from "../../config/socket";
+import { instanceAxs } from "../../config/api";
+
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [currentY, setCurrentY] = useState(0);
   const [isRender, setIsRender] = useState(true);
-  // const [searchInput, setSearchInput] = useState('a');
 
   const isLoggedIn = useSelector(state => state.user.isLoggedIn)
   const userObject = useSelector(state => state.user.user);
   const [user, setUser] = useState({});
+  const [isUnreadMsg, setIsUnreadMsg] = useState(null)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //########## FUNCTIONS ##########
 
-/*   const checkCharacters = async () => {
-      let input = searchInput.trim().replace(/\s/g, "+");
-      setSearchInput(input) 
-  } */
+  useEffect(() => {
+    if(Object.keys(userObject).length === 0) return
+    instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
+      console.log(response)
+      response.data.map(e => {
+        if(e.unreadMessages > 0) {
+          setIsUnreadMsg(true)
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }, [])
+
+  useEffect(() => {
+    socket.on('getMessage', () => {
+    if(Object.keys(userObject).length === 0) return
+      instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
+        response.data.map(e => {
+          if(e.unreadMessages > 0) {
+            setIsUnreadMsg(true)
+          }
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    })
+  }, [])
+
+  useEffect(() => {
+    if(Object.keys(userObject).length === 0) return
+    instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
+      console.log(response)
+      response.data.map(e => {
+        if(e.unreadMessages > 0) {
+          setIsUnreadMsg(true)
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }, [userObject])
 
   const scroll = () => {
     if (window.scrollY > currentY) {
@@ -37,6 +83,7 @@ const Navigation = () => {
   }
 
   const logout = () => {
+    navigate('/');
     dispatch(logoutRequest())
   }
 
@@ -57,14 +104,14 @@ const Navigation = () => {
                     <Searchbar></Searchbar>
                     
                     {isLoggedIn ? 
-                        <Nav className="d-flex align-items-center flex-grow-1 justify-content-end navbar-username">
+                        <Nav className="navbar-nav">
                             <Avatar className="navbar-avatar" alt='pp' src={user.profilePicture} sx={{width: 32, height: 32, marginRight: 1}}></Avatar>
-                            <DropdownButton id="dropdown-basic-button" title={user.username || user.email || ''} variant="light">
+                            <DropdownButton id="dropdown-basic-button" title={user.username || user.email || ''} style={{}} variant="light">
                                 <Dropdown.Item href="min-konto">Min Konto</Dropdown.Item>
                                 <Dropdown.Divider/>
                                 <Dropdown.Item href="/nyannonse"><i className="fa-solid fa-plus me-2"/> Ny Annonse</Dropdown.Item>
                                 <Dropdown.Item href="/profil"><i className="fa-regular fa-user me-2"/> Min Profil</Dropdown.Item>
-                                <Dropdown.Item href="#"><i className="fa-regular fa-message me-2"/> Meldinger</Dropdown.Item>
+                                <Dropdown.Item href="/chat"><i className="fa-regular fa-message me-2"/>{isUnreadMsg ? <span>Meldinger <i className="fa-solid fa-circle fa-2xs mx-3" style={{color: "#0d6efd"}}/></span> : 'Meldinger'}</Dropdown.Item>
                                 <Dropdown.Item href="/mine-annonser"><i className="fa-solid fa-scroll me-2"/> Mine Annonser</Dropdown.Item>
                                 <Dropdown.Item href="/favoritter"><i className="fa-regular fa-heart me-2"/> Favoritter</Dropdown.Item>
                                 <Dropdown.Divider/>

@@ -25,7 +25,7 @@ export const sendSignUpRequest = (user) => {
                     dispatch(userActions.login(user))
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen, ${user.name}`}))
                 } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
                 }
             }).catch(error => {
                 console.log(error)
@@ -40,14 +40,13 @@ export const sendLoginRequest = (user) => {
 
         const handleRequest = async () => {
             instanceAxs.post('/login', user).then(response => {
-                console.log(response)
                 const responseMsg = response.data.message;
                 if(responseMsg === 'user logged in') {
                     const user = response.data.user;
                     dispatch(userActions.login(user));
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen tilbake, ${user.name}`}))
                 } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
                 }
             }).catch(error => {
                 console.log(error)
@@ -67,7 +66,7 @@ export const googleLoginRequest = (credentials) => {
                     dispatch(userActions.login(user))
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Logget inn'}))
                 } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
                 }
             }).catch(error => {
                 console.log(error)
@@ -86,7 +85,7 @@ export const logoutRequest = () => {
                     dispatch(userActions.logout())
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: 'Du har logget ut'}))
                 } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: response.data.message}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
                 }
             }).catch(error => {
                 console.log(error)
@@ -108,7 +107,7 @@ export const updateUser = (data) => {
                 dispatch(userActions.setUser(response.data.user));
                 dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: msg}))
             } else {
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: msg}))
+                dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: msg}))
             }        
         }
         setTimeout(async () => {
@@ -171,7 +170,7 @@ export const removeFromFavorites = (annonceId) => {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: msg}))
                     return;
                 }
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: msg}))
+                dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: msg}))
             })
         }
         await handleRequest();
@@ -188,7 +187,7 @@ export const fetchFavorites = () => {
                     dispatch(userActions.setUserFavorites(productArray))
                     return;
                 }
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: msg}))
+                dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: msg}))
             })
         }
         await handleRequest();
@@ -202,7 +201,7 @@ export const removeAnnonce = (annonceId) => {
                 if(response.status === 200) {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: response.data.message}))
                 } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'danger', msg: 'Error occured while deleting object'}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Error occured while deleting object'}))
                 }
             })
         }

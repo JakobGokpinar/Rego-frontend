@@ -16,7 +16,7 @@ const Account = () => {
                       <p>Se din profil</p>
                   </div>
               </a>
-              <a href='/#'>
+              <a href='/meldinger'>
                   <div className="profilelink-box" >
                       <i className="fa-regular fa-message profilelink-box-icon"/>
                       <h3>Meldinger</h3>

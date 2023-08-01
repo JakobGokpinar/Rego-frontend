@@ -137,10 +137,6 @@ const SearchResult = () => {
       });       
 },[])
 
-useEffect(() => {
-  console.log(productArray)
-}, [productArray])
-
     return (
           <Container fluid className="searchresult-container">
             <Row  className="result-row">
@@ -184,7 +180,9 @@ useEffect(() => {
                                         id={product._id}
                                         location={product.location}
                                         isFavorite={product.isFavorite}
-                                        ></ProductCard>
+                                        sellerId={product.sellerId}
+                                        user={user}
+                                    ></ProductCard>
                               </div>
                           )
                         })}

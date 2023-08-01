@@ -142,7 +142,7 @@ function Register() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Text>
-                    Har allerede en kont?{" "}
+                    Har allerede en konto?{" "}
                     <a href="/login" className="login-link">
                       Logg inn
                     </a>

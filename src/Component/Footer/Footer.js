@@ -42,7 +42,7 @@ const Footer = () => {
                           <div className='footer-content'>
                                 <a href='/profil'>Min Profil</a>
                                 <a href='/nyannonse'>Ny Annonse</a>
-                                <a href='/#'>Meldinger</a>
+                                <a href='/chat'>Meldinger</a>
                                 <a href='/mine-annonser'>Mine Annonser</a>
                                 <a href='/favoritter'>Favoritter</a>
                           </div>
