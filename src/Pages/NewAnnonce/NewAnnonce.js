@@ -13,7 +13,6 @@ import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip';
-import Popover from 'react-bootstrap/Popover';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Backdrop from '@mui/material/Backdrop';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -100,7 +99,6 @@ const handleImageDelete = (e,imagename) => {
 const handleImageDescription = (e,item) => {
   var copyImageArray = imageArray;
   var copyItem = item;
-
   let index = copyImageArray.indexOf(item);
 
   if(index !== -1) {
@@ -136,7 +134,6 @@ const insertSpecialProp = () => {
   setShowBackdrop(false)
 }
 const removeSpecialProp = (title) => {
-  console.log(title)
   var copyItems = specPropArray;
   copyItems = copyItems.filter(item => item.title !== title);
   setSpecPropArray(copyItems)
@@ -172,7 +169,7 @@ const submitAnnonce = async (event) => {
       const response = await instanceAxs.post('/newannonce/update', {annonceImages: copyImages, annonceproperties, annonceId})
       console.log('response', response)
       if(response.status !== 200) {
-        dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke oppdateres'}));
+        dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke oppdateres akkurat nå. Vennligst prøv igjen senere.'}));
         setIsPublishing(false);
       } else {
         dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: 'Annonsen ble oppdatert'}));
@@ -184,7 +181,7 @@ const submitAnnonce = async (event) => {
       }
     } catch (error) {
         console.log(error)
-        dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke oppdateres'}));
+        dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke oppdateres akkurat nå. Vennligst prøv igjen senere.'}));
         setIsPublishing(false);
     }
   } else {
@@ -267,7 +264,7 @@ const submitAnnonce = async (event) => {
         navigate('/')
       }, 2000)
     } else {
-      dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke publiseres'}));
+      dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Annonsen kunne ikke publiseres akkurat nå. Vennligst prøv igjen senere.'}));
       setIsPublishing(false);
     }
   })
@@ -301,6 +298,7 @@ const submitAnnonce = async (event) => {
 
   useEffect(() => {
     const routerState = routerLocation.state;
+    console.log(routerState)
     if(routerState) {
       let stateAnnonce = routerState.annonce;
       let foundCategory = data.categories.find(item => item.maincategory === stateAnnonce.category)
@@ -412,7 +410,7 @@ const submitAnnonce = async (event) => {
                                   <Form.Select id="subCategory" required value={annoncePropertyObject["subCategory"]}
                                       onChange={handlePropertyChange} disabled={isPublishing}>
                                         <option value={JSON.stringify('')}>Velg en under kategori</option>
-                                        {selectedMainCat.subcategories.map(item => {
+                                        {selectedMainCat?.subcategories.map(item => {
                                           return(
                                             <option value={item} key={item}>{item}</option>
                                           )
@@ -456,7 +454,7 @@ const submitAnnonce = async (event) => {
                               <ul className="images-small-ul" style={{listStyleType: 'none', padding: 0}}>
                                   {typeof imageArray !== 'boolean' && imageArray.map((item,index) => {
                                       return(
-                                          <li  className="images-small-li mb-3" key={index} draggable
+                                          <li  className="images-small-li mb-3" key={index} draggable cancel='.btn'
                                             onDragStart={(e) => dragStart(e, index)} onDragEnter={(e) => dragEnter(e, index)} onDragEnd={drop} 
                                             >
                                                 <div className="images-li-div-small">
@@ -513,7 +511,7 @@ const submitAnnonce = async (event) => {
                                   type="radio" value="brukt" name="status" checked={annoncePropertyObject["status"] === 'brukt'}
                                   id="status" label="Brukt" onChange={handlePropertyChange} disabled={isPublishing}
                                 />
-                                                                <OverlayTrigger placement="right"
+                                      <OverlayTrigger placement="right"
                                       overlay={
                                           <Tooltip>
                                               Velg om produktet ditt er helt nytt eller brukt fra før.                                          
@@ -562,7 +560,8 @@ const submitAnnonce = async (event) => {
                                                     className="mb-3"
                                                     style={{color: 'black'}}
                                                   >
-                                                    <Form.Control type="text" id="value" name="val" placeholder="name@example.com" onChange={e => setSpecPropVal(e.target.value)}/>
+                                                    <Form.Control type="text" id="value" name="val" placeholder="name@example.com" onChange={e => setSpecPropVal(e.target.value)
+                                                      }/>
                                                 </FloatingLabel>
                                                 <Button variant="outline-primary" type='button' className="w-100 mt-5" onClick={insertSpecialProp}><i className="fa-solid fa-plus mx-2"/>Legg til nokkelinfo</Button>
                                                 <Button variant="outline-dark" type='button' className="mt-2" onClick={() => setShowBackdrop(false)}>Lukk</Button>
@@ -623,7 +622,6 @@ const submitAnnonce = async (event) => {
                                   }
                               </>
                           }
-
                       </Form>
                 </Col>
 
@@ -633,7 +631,7 @@ const submitAnnonce = async (event) => {
                           {selectedMainCat !== '' && 
                               <Breadcrumb className="mt-3">
                                   <Breadcrumb.Item active>Kategori</Breadcrumb.Item>
-                                  <Breadcrumb.Item href="#">{selectedMainCat.maincategory}</Breadcrumb.Item>
+                                  <Breadcrumb.Item href="#">{selectedMainCat?.maincategory}</Breadcrumb.Item>
                                   <Breadcrumb.Item>{annoncePropertyObject["subCategory"]}</Breadcrumb.Item>
                               </Breadcrumb>
                             }

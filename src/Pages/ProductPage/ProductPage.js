@@ -233,7 +233,7 @@ function ProductPage() {
                     </Row>
                 </Container>
                 :
-                <h4 className="m-5">Beklager, annonsen kunne ikke finnes</h4>
+                <h4 className="m-5">Ingen Annonse</h4>
             }
         </div>
     )

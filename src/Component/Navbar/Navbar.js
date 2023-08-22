@@ -61,7 +61,6 @@ const Navigation = () => {
   useEffect(() => {
     if(Object.keys(userObject).length === 0) return
     instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
-      console.log(response)
       response.data.map(e => {
         if(e.unreadMessages > 0) {
           setIsUnreadMsg(true)
