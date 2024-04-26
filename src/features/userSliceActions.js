@@ -19,11 +19,14 @@ export const sendSignUpRequest = (user) => {
     return async (dispatch) => {
         const handleRequest = async () => {
             instanceAxs.post('/signup', user).then(response => {
+                console.log("🚀 ~ file: userSliceActions.js:22 ~ instanceAxs.post ~ response:", response)
                 const responseMsg = response.data.message;
+                
                 if(responseMsg === 'user created') {
                     const user = response.data.user;
                     dispatch(userActions.login(user))
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen, ${user.name}`}))
+                    
                 } else {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
                 }
@@ -98,17 +101,16 @@ export const logoutRequest = () => {
 export const updateUser = (data) => {
     return async (dispatch) => {
         const handleRequest = async () => {
-            if(data.formData !== null) {
-                 
-            const response = await instanceAxs.post('/profile/upload/picture', data.formData)
-            const msg = response.data.message;
-            if(msg === 'profile picture uploaded') {
-                dispatch(userActions.setUser({}))
-                dispatch(userActions.setUser(response.data.user));
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: msg}))
-            } else {
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: msg}))
-            }        
+            if(data.formData !== null) { 
+                const response = await instanceAxs.post('/profile/upload/picture', data.formData)
+                const msg = response.data.message;
+                if(msg === 'profile picture uploaded') {
+                    dispatch(userActions.setUser({}))
+                    dispatch(userActions.setUser(response.data.user));
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: msg}))
+                } else {
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: msg}))
+                }        
         }
         setTimeout(async () => {
             const res = await instanceAxs.post('/profile/update/userinfo', data.userdata)

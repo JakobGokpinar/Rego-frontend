@@ -66,13 +66,12 @@ const Chat = () => {
       fetchConversations();
     }, [user])
 
-    useEffect(async () => {
-      let buyer = location?.state?.buyer;
-      let seller = location?.state?.seller;
-      let product_id = location?.state?.product_id;
-      if(!buyer || !seller || !product_id) return;
-
+    useEffect(() => {
       const fetchConversation = async() => {
+        let buyer = location?.state?.buyer;
+        let seller = location?.state?.seller;
+        let product_id = location?.state?.product_id;
+        if(!buyer || !seller || !product_id) return;
           try {
             let response = await instanceAxs.get(`/chat/get/room?buyer=${buyer}&seller=${seller}&productId=${product_id}`)
             if(response.status !== 200) return;

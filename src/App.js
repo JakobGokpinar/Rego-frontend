@@ -13,14 +13,15 @@ import Register from './Pages/LoginAndRegister/Register.js';
 import ProductPage from './Pages/ProductPage/ProductPage.js';
 import Chat from './Pages/Chat/Chat';
 import SearchResult from './Pages/SearchedResultPage/SearchResult.js';
+import NewAnnonce from './Pages/NewAnnonce/NewAnnonce.js';
+import EmailVerify from './Pages/EmailVerification/EmailVerify';
 import Account from './Pages/Profile/Profile.js';
+import Profile from './Pages/Profile/Profile/Profile.js';
+import Favorites from './Pages/Profile/Favorites/Favorites.js';
+import MyAnnonces from './Pages/Profile/MyAnnonces/MyAnnonces.js';
 import PrivacyPolicy from './Pages/PrivacyAndAbout/PrivacyPolicy.js';
 import AboutUs from './Pages/PrivacyAndAbout/AboutUs.js';
 import NotFound from './Pages/NotFound.js';
-import NewAnnonce from './Pages/NewAnnonce/NewAnnonce.js';
-import Favorites from './Pages/Profile/Favorites/Favorites.js';
-import MyAnnonces from './Pages/Profile/MyAnnonces/MyAnnonces.js';
-import Profile from './Pages/Profile/Profile/Profile.js';
 
 import { userActions } from './features/userSlice.js';
 import { logoutRequest } from './features/userSliceActions.js';
@@ -72,6 +73,7 @@ const App = () => {
                     <Route  path='/search' element={<SearchResult/>}/>
                     <Route path={'/produkt/:annonceId'} element={<ProductPage/>}/>
                     <Route  path='/chat' element={<Chat/>}/>
+                    <Route path='/emailverify' element={<EmailVerify/>}/>
                     <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
                     <Route path='/about-us' element={<AboutUs/>}></Route>
                     <Route path="*" element={<NotFound/>}/>

@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./Navbar.css";
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useDispatch, useSelector } from "react-redux";
-import { logoutRequest } from "../../features/userSliceActions";
 import Avatar from '@mui/material/Avatar';
-import Searchbar from "./Searchbar";
-import socket from "../../config/socket";
-import { instanceAxs } from "../../config/api";
 
-import { useNavigate } from "react-router-dom";
+import Searchbar from "./Searchbar";
+import { logoutRequest } from "../../features/userSliceActions";
+import { instanceAxs } from "../../config/api";
+import socket from "../../config/socket";
 
 const Navigation = () => {
   const [currentY, setCurrentY] = useState(0);
@@ -28,25 +29,27 @@ const Navigation = () => {
   //########## FUNCTIONS ##########
 
   useEffect(() => {
-    if(Object.keys(userObject).length === 0) return
-    instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
-      console.log(response)
-      response.data.map(e => {
-        if(e.unreadMessages > 0) {
-          setIsUnreadMsg(true)
-        }
+    const fetchChatrooms = () => {
+      if(Object.keys(userObject).length === 0) return
+      instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
+        response.data.forEach(element => {
+          if(element.unreadMessages > 0) {
+            setIsUnreadMsg(true)
+          }
+        });
       })
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }, [])
+      .catch(error => {
+        console.log(error)
+      })
+    }
+    fetchChatrooms();
+  }, [userObject])
 
   useEffect(() => {
     socket.on('getMessage', () => {
     if(Object.keys(userObject).length === 0) return
       instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
-        response.data.map(e => {
+        response.data.forEach(e => {
           if(e.unreadMessages > 0) {
             setIsUnreadMsg(true)
           }
@@ -56,12 +59,12 @@ const Navigation = () => {
         console.log(error)
       })
     })
-  }, [])
+  }, [userObject])
 
   useEffect(() => {
     if(Object.keys(userObject).length === 0) return
     instanceAxs.post('/chat/get/rooms', { user: userObject?._id }).then(response => {
-      response.data.map(e => {
+      response.data.forEach(e => {
         if(e.unreadMessages > 0) {
           setIsUnreadMsg(true)
         }

@@ -24,10 +24,11 @@ import { useFindCommuneByPostnumber } from "../../features/appDataSliceActions";
 import data from  '../../categories.json';
 import { fetchUser } from "../../features/userSliceActions";
 import { uiSliceActions } from "../../features/uiSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { redirect, useLocation, useNavigate } from "react-router-dom";
 
 const NewAnnonce = () => {
   const loggedIn = useSelector(state => state.user.isLoggedIn);
+  const user = useSelector(state => state.user.user)
   const communeFinder = useFindCommuneByPostnumber();
   
   const dragItem = useRef();
@@ -253,7 +254,6 @@ const submitAnnonce = async (event) => {
     imagelocations: imageLoc,
     annonceid: anId
   } 
-  console.log('annonce obj', annonce)
   await instanceAxs.post('/newannonce/create', annonce).then(result => {
     console.log(result)
     if(result.status === 200) {
@@ -274,7 +274,6 @@ const submitAnnonce = async (event) => {
  useEffect(() => { 
   var postnum = annoncePropertyObject["postnumber"];
   postnum = (postnum !== '' && postnum !== undefined) ? postnum : 0;  
-
   fetch(`https://secure.geonames.org/postalCodeLookupJSON?postalcode=${postnum}&country=no&username=goksoft`, 
   {method: 'GET'})
   .then(response => response.json())
@@ -320,12 +319,25 @@ const submitAnnonce = async (event) => {
                         <Modal.Title>Du må logge inn</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Du må logge inn for å lage ut annonse</p>
+                        <p>Du må logge inn for å legge ut annonse</p>
                         <a href="/login">
                             <Button variant="danger">Logg inn</Button>
                         </a>
                     </Modal.Body>
                 </Modal>
+              :
+             (!user. isEmailVerified ? 
+                  <Modal show={true}>
+                    <Modal.Header>
+                      <Modal.Title>Verifiser din email</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>Du må verifisere din email addresse for å legge ut annonse</p>
+                      <a href='/profil'>
+                        <Button variant="primary">Gå til min profil</Button>
+                      </a>
+                    </Modal.Body>
+                  </Modal>
               :
               <Row style={{margin: 0}}>
                 <Col className="newannonce-col input-col border" lg={4}md={6}>
@@ -593,7 +605,7 @@ const submitAnnonce = async (event) => {
                                         <Button variant="primary" type="submit" className="me-3 create-annonce-control-button">
                                             Lagre
                                         </Button>
-                                        <Button variant="outline-primary" type="button" className="create-annonce-control-button">
+                                        <Button variant="outline-primary" type="button" className="create-annonce-control-button"onClick={redirect('/mine-annonser')}>
                                             Avbryt
                                           </Button>   
                                     </>                          
@@ -602,7 +614,7 @@ const submitAnnonce = async (event) => {
                                       <Button variant="primary" type="button" className="me-3 create-annonce-control-button" disabled>
                                           <Spinner size="sm" className="me-2"/> Lagrer...
                                       </Button>
-                                      <Button variant="outline-primary" type="button" className="create-annonce-control-button">
+                                      <Button variant="outline-primary" type="button" className="create-annonce-control-button" onClick={redirect('/mine-annonser')}>
                                             Avbryt
                                       </Button>   
                                   </>
@@ -694,7 +706,7 @@ const submitAnnonce = async (event) => {
                       </div>
                 </Col>
 
-              </Row>
+              </Row>)
           }
       </div>
     );

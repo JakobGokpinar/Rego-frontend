@@ -28,6 +28,7 @@ const userSlice = createSlice({
             window.localStorage.removeItem('expiry');
         },
         setUser(state, action) {
+            if(!state.user) return;
             state.user = action.payload;
             window.localStorage.setItem('user', JSON.stringify(action.payload));
         },

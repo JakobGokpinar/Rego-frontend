@@ -13,9 +13,7 @@ import {
 } from "../../features/userSliceActions";
 import { uiSliceActions } from '../../features/uiSlice';
 
-
 function Register() {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -64,7 +62,8 @@ function Register() {
         setIsloading(true)
         let user = {name, lastname, email, password}
         setTimeout(() => {
-            dispatch(sendSignUpRequest(user))        
+            dispatch(sendSignUpRequest(user))   
+            setIsloading(false)     
         }, 1000)
     }
 
@@ -146,6 +145,7 @@ function Register() {
                     <a href="/login" className="login-link">
                       Logg inn
                     </a>
+                    
                   </Form.Text>
                 </Form.Group>
   

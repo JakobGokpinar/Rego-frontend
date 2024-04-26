@@ -11,7 +11,6 @@ export default function Searchbar() {
 
     const [productObjects, setProductObjects] = useState([])
     const [suggestedCategories, setSuggestedCategories] = useState([]);
-    const [suggestedSubCategories, setSuggestedSubCategories] = useState([])
     const [searchInput, setSearchInput] = useState('');
     const [isShow, setIsShow] = useState(false);
 
@@ -36,12 +35,10 @@ export default function Searchbar() {
                 return {title: item.title, img: item.annonceImages[0], id: item._id}
             })
             const suggestedCat = response.data.categories.slice(0,3);
-            const suggestedSub = response.data.subCategories.slice(0,3);
             responseData = responseData.slice(0,3);
 
             setProductObjects(responseData)
             setSuggestedCategories(suggestedCat)
-            setSuggestedSubCategories(suggestedSub)
             setIsShow(true)
         })        
     }, [searchInput])

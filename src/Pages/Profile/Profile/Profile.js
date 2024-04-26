@@ -1,22 +1,28 @@
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
-import { dataURLtoFile } from "../../../utils/dataURltoFile";
+import { useDispatch, useSelector } from "react-redux";
+
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Alert from 'react-bootstrap/Alert';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Avatar from "@mui/material/Avatar";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUser,removeProfilePicture } from "../../../features/userSliceActions";
 import Spinner from "react-bootstrap/Spinner";
+
+import { updateUser,removeProfilePicture } from "../../../features/userSliceActions";
 import { getCroppedImage } from '../../../utils/cropImage.js';
+import { dataURLtoFile } from "../../../utils/dataURltoFile";
+import { instanceAxs } from "../../../config/api";
+import { uiSliceActions } from "../../../features/uiSlice";
 
 const Profile = () => {
   const user = useSelector(state => state.user.user);
-  const hiddenFileInput = React.useRef(null);
+  
   const dispatch = useDispatch();
-
+  const hiddenFileInput = React.useRef(null);
+  
   const [isLoading, setIsLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [formData, setFormData] = useState(null);
@@ -103,6 +109,28 @@ const Profile = () => {
     setProfilePicture(user.profilePicture);
   }, [user]);
 
+  const sendVerificationEmail = () => {
+    var email = user?.email;
+    var username =  user?.username;
+    var id = user?._id;
+    instanceAxs.post('/email/newverificationemail', {email, username, id}).then(response => {
+      if(response.status === 200) {
+        dispatch(uiSliceActions.setFeedbackBanner({
+          severity: 'success', 
+          msg: response.data.message
+        }))
+      } else {
+        dispatch(uiSliceActions.setFeedbackBanner({
+          severity: 'danger', 
+          msg: response.data.message
+        }))
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
   return (
     <div className="profile-container">
       <Breadcrumb>
@@ -111,7 +139,16 @@ const Profile = () => {
           Profil
         </Breadcrumb.Item>
       </Breadcrumb>
-
+      <div className="verify-warning-div" style={{display: user.isEmailVerified && 'none'}}>
+          <Alert variant="danger" className="padding-0">
+              <Alert.Heading><i className="fa-solid fa-circle-exclamation me-2"/>Your account has not been verified</Alert.Heading>
+              <p>
+                To verify your account, you can follow the steps in the email sent to you. 
+                If you need a new email, <Alert.Link onClick={sendVerificationEmail}>you can click here</Alert.Link>.
+                By having a verified account, you can create and publish your own annonces.
+              </p>
+          </Alert>
+      </div>
       <div className="profile-content">
         <Row className="profile-content-row">
           <Col className="profile-content-col content-profileImage" lg={3}>
