@@ -91,7 +91,7 @@ const handlePropertyChange = (e) => {
 }
 
 const handleImageDelete = (e,imagename) => {
-  e.preventDefault()
+  e.preventDefault();
   let imgArr = imageArray;
   imgArr = imgArr.filter(img => img.name !== imagename);
   setImageArray(imgArr)
@@ -243,6 +243,7 @@ const submitAnnonce = async (event) => {
         cb(annonceProps, finalAnnonceImages, annonceId)
       } else {
         dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: result.data.message}))
+        setIsPublishing(false)
       }
     })
     .catch( err => console.log(err) );
@@ -370,7 +371,7 @@ const submitAnnonce = async (event) => {
                                   <p className="me-3">kr</p>
                                   <Form.Select className="w-50" id="pricePeriod" value={annoncePropertyObject["pricePeriod"]} onChange={handlePropertyChange}required>
                                       <option value="">Pris period</option>
-                                      <option value="totalt">Totalt</option>
+                                      <option value="totalt">Total pris</option>
                                       <option value="per dag">Per dag</option>
                                       <option value="per uke">Per uke</option>
                                       <option value="per måned">Per måned</option>

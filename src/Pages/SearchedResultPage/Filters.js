@@ -180,11 +180,11 @@ const Filters = ({handleFilterChange, removeSelectedFilter, searchParams, counti
         </Accordion.Item>
       </Accordion>
 
-      <Accordion className="filter-accordion">
+      <Accordion className="filter-accordion" data-bs-theme="dark">
         <Accordion.Item>
           <Accordion.Header>Kategori</Accordion.Header>
           <Accordion.Body>
-            <Form.Select aria-label="maincategory-selection" className="mb-2" onChange={handleCategoryChange} value={mainCategory !== '' && JSON.stringify(mainCategory)}>
+            <Form.Select data-bs-theme="dark" aria-label="maincategory-selection" className="mb-2" onChange={handleCategoryChange} value={mainCategory !== '' && JSON.stringify(mainCategory)}>
             <option value={JSON.stringify('')}>Velg en hovedkategori</option>
             {categoryObject.categories.map((item, index) => {
               return(

@@ -1,9 +1,12 @@
 import axios from "axios";
+require('dotenv').config();
 
-const serverURL = "https://rego-api.onrender.com";   //http://localhost:3080/              https://rego-api.onrender.com
+const serverURL = process.env.REACT_APP_SERVER_URL;   
 const userApi = "user";
 const fileApi = "file";
 
+
+console.log("server url, ", serverURL);
 const instanceAxs = axios.create({
     baseURL: serverURL,
     withCredentials: true

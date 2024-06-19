@@ -83,12 +83,11 @@ export const logoutRequest = () => {
     return async (dispatch) => {
         const handleRequest = async () => {
             instanceAxs.delete('/logout').then(response => {
-                const responseMsg = response.data;
-                if(responseMsg === 'user logged out') {
+                if(response.status === 200) {
                     dispatch(userActions.logout())
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: 'Du har logget ut'}))
                 } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: 'Det oppsto et feil. Prøve igjen senere'}))
                 }
             }).catch(error => {
                 console.log(error)

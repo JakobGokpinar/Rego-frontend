@@ -97,9 +97,9 @@ const Navigation = () => {
     return (
       <div>
         {isRender &&
-          <Navbar bg="light" expand="lg" fixed="top" className="navigation">
+          <Navbar expand="lg" fixed="top" className="navigation" bg="light">
             <Container>
-                <Navbar.Brand href="/" className="">Rego</Navbar.Brand>
+                <Navbar.Brand href="/" className="" style={{color: "black"}}>Rego</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />   
                 <Navbar.Collapse id="basic-navbar-nav" style={{margin: 10}}>       
 
@@ -122,7 +122,7 @@ const Navigation = () => {
                         </Nav>
                           :
                           <Nav className="flex-grow-1 justify-content-end">
-                              <Nav.Link href='/login'>Logg Inn</Nav.Link>
+                              <Nav.Link href='/login'color="white" className="log-in-button">Logg Inn</Nav.Link>
                               <Nav.Link href='/register'>Register</Nav.Link>
                           </Nav>
                       }

@@ -1,8 +1,7 @@
 import { io } from "socket.io-client";
-// https://rego-api.onrender.com
-//http://localhost:3080/
+require('dotenv').config();
 
-let serverLink = 'https://rego-api.onrender.com';
+let serverLink = process.env.REACT_APP_SERVER_URL;
 const socket = io(serverLink)
 
 export default socket
