@@ -69,8 +69,10 @@ const MyAnnonces = () => {
                     </div>
                 :
                     <div className='myannonces-content'>
-                        <p>Du har ingen annonser. Prøv å logge inn og lage ut annonser</p>
+                        <p>Du har ingen aktive annonser nå. Prøv å logge inn og legge ut annonser</p>
                     </div>
+
+                    
                 }
                 <Modal show={showRemoveModal} onHide={() => setShowRemoveModal(false)}>
                     <Modal.Header closeButton>

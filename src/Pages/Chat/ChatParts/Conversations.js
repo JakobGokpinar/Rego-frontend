@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Conversation.css';
 import { Conversation } from '@chatscope/chat-ui-kit-react'
 import { Avatar } from '@mui/material'
-import { instanceAxs } from '../../../config/api';
+import { instanceAxs } from '../../../config/api.js';
 
 const Conversations = ({ productId, conversation, loggedUser, isActive, findFriend }) => {
 

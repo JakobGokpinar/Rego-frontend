@@ -3,7 +3,7 @@ import './Chat.css';
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { Button, Modal, Spinner } from 'react-bootstrap';
 import { format } from "timeago.js";
-import { instanceAxs } from "../../config/api";
+import { instanceAxs } from "../../config/api.js";
 import socket from '../../config/socket.js'
 import Conversations from "./ChatParts/Conversations.js";
 import Messages from "./ChatParts/Messages";

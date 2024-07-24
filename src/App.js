@@ -26,12 +26,11 @@ import NotFound from './Pages/NotFound.js';
 import { userActions } from './features/userSlice.js';
 import { logoutRequest } from './features/userSliceActions.js';
 import { fetchNorwayDistricts } from './features/appDataSliceActions.js';
-require('dotenv').config();
 
 const App = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(window.localStorage.getItem('user'));
-
+  
   useEffect(() => {
     const isLoggedIn = JSON.parse(window.localStorage.getItem('isLoggedIn'));
     const expiry = JSON.parse(window.localStorage.getItem('expiry'));

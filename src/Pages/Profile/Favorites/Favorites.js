@@ -1,6 +1,6 @@
 import "./Favorites.css";
 import ProductCard from "../../../Component/ProductCard/ProductCard";
-import { instanceAxs } from "../../../config/api";
+import { instanceAxs } from "../../../config/api.js";
 import React, { useEffect, useState } from "react";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { useSelector } from "react-redux";

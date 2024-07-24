@@ -19,8 +19,8 @@ const EmailVerify = () => {
     const dispatch = useDispatch();
 
     const [token, setToken] = useState("");
-    const [alertVarient, setAlertVarient] = useState("danger")
-    const [alertMessage, setAlertMessage] = useState("Please verify your email by clicking the verify button below")
+    const [alertVarient, setAlertVarient] = useState("warning")
+    const [alertMessage, setAlertMessage] = useState("You can verify your account by clicking the verify button below")
     const [isVerifySuccessful, setIsVerifySuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
 

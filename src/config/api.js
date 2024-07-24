@@ -1,7 +1,6 @@
 import axios from "axios";
-require('dotenv').config();
 
-const serverURL = process.env.REACT_APP_SERVER_URL;   
+const serverURL = "https://rego-api.onrender.com/";   
 const userApi = "user";
 const fileApi = "file";
 

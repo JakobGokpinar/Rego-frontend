@@ -17,13 +17,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Backdrop from '@mui/material/Backdrop';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { getCroppedImage } from "../../utils/cropImage";
-import { dataURLtoFile } from "../../utils/dataURltoFile";
-import { instanceAxs } from "../../config/api";
-import { useFindCommuneByPostnumber } from "../../features/appDataSliceActions";
+import { getCroppedImage } from "../../utils/cropImage.js";
+import { dataURLtoFile } from "../../utils/dataURltoFile.js";
+import { instanceAxs } from "../../config/api.js";
+import { useFindCommuneByPostnumber } from "../../features/appDataSliceActions.js";
 import data from  '../../categories.json';
-import { fetchUser } from "../../features/userSliceActions";
-import { uiSliceActions } from "../../features/uiSlice";
+import { fetchUser } from "../../features/userSliceActions.js";
+import { uiSliceActions } from "../../features/uiSlice.js";
 import { redirect, useLocation, useNavigate } from "react-router-dom";
 
 const NewAnnonce = () => {
@@ -298,8 +298,9 @@ const submitAnnonce = async (event) => {
 
   useEffect(() => {
     const routerState = routerLocation.state;
-    console.log(routerState)
+  
     if(routerState) {
+      console.log("🚀 ~ useEffect ~ routerState: Passed parameters from router", routerState)
       let stateAnnonce = routerState.annonce;
       let foundCategory = data.categories.find(item => item.maincategory === stateAnnonce.category)
       setIsModifyAnnonce(true);
@@ -327,13 +328,13 @@ const submitAnnonce = async (event) => {
                     </Modal.Body>
                 </Modal>
               :
-             (!user. isEmailVerified ? 
+             (!user.isEmailVerified ? 
                   <Modal show={true}>
                     <Modal.Header>
                       <Modal.Title>Verifiser din email</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      <p>Du må verifisere din email addresse for å legge ut annonse</p>
+                      <p>Du må verifisere din e-mailadresse først for å legge ut en annonse</p>
                       <a href='/profil'>
                         <Button variant="primary">Gå til min profil</Button>
                       </a>
@@ -576,8 +577,12 @@ const submitAnnonce = async (event) => {
                                                     <Form.Control type="text" id="value" name="val" placeholder="name@example.com" onChange={e => setSpecPropVal(e.target.value)
                                                       }/>
                                                 </FloatingLabel>
-                                                <Button variant="outline-primary" type='button' className="w-100 mt-5" onClick={insertSpecialProp}><i className="fa-solid fa-plus mx-2"/>Legg til nokkelinfo</Button>
-                                                <Button variant="outline-dark" type='button' className="mt-2" onClick={() => setShowBackdrop(false)}>Lukk</Button>
+                                                <div className="d-flex" style={{ gap: 20, marginTop: 40}}>
+
+                                                  <Button variant="outline-primary" type='button' className="w-75" onClick={insertSpecialProp}><i className="fa-solid fa-plus mx-2"/>Legg til nokkelinfo</Button>
+                                                  <Button variant="outline-dark" type='button' className="w-25" onClick={() => setShowBackdrop(false)}>Lukk</Button>
+                                                </div>
+
                                       </div>
                               </Backdrop>
                               </div>
@@ -625,7 +630,7 @@ const submitAnnonce = async (event) => {
                             :
                               <>
                                   {!isPublishing ? 
-                                    <Button type="submit" className="mb-3" style={{width: '100px'}}>
+                                    <Button type="submit" className="mb-3" style={{width: "100%"}}>
                                         Publiser
                                     </Button>
                                     : 

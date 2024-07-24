@@ -1,6 +1,6 @@
-import { instanceAxs } from "../config/api";
-import { userActions } from "./userSlice";
-import { uiSliceActions } from "./uiSlice";
+import { instanceAxs } from "../config/api.js";
+import { userActions } from "./userSlice.js";
+import { uiSliceActions } from "./uiSlice.js";
 
 export const fetchUser = () => {
     return async (dispatch) => {
@@ -25,7 +25,7 @@ export const sendSignUpRequest = (user) => {
                 if(responseMsg === 'user created') {
                     const user = response.data.user;
                     dispatch(userActions.login(user))
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen, ${user.name}`}))
+                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: `Velkommen, ${user.name}. Vennligst sjekk epost adressen for å verifisere kontoen.`}))
                     
                 } else {
                     dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: response.data.message}))
@@ -43,6 +43,7 @@ export const sendLoginRequest = (user) => {
 
         const handleRequest = async () => {
             instanceAxs.post('/login', user).then(response => {
+                console.log(response)
                 const responseMsg = response.data.message;
                 if(responseMsg === 'user logged in') {
                     const user = response.data.user;

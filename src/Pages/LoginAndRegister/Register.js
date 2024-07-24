@@ -67,7 +67,6 @@ function Register() {
         }, 1000)
     }
 
-
     return(
         <Container className="signup-container" fluid>
         <Row className="signup__row">

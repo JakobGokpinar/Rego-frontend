@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 
 import Searchbar from "./Searchbar";
 import { logoutRequest } from "../../features/userSliceActions";
-import { instanceAxs } from "../../config/api";
+import { instanceAxs } from "../../config/api.js";
 import socket from "../../config/socket";
 
 const Navigation = () => {

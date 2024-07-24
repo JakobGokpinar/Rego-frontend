@@ -12,7 +12,7 @@ import Button from "react-bootstrap/Button";
 import FilterBadge from "./FilterBadge";
 
 import ProductCard from "../../Component/ProductCard/ProductCard.js";
-import { instanceAxs } from "../../config/api";
+import { instanceAxs } from "../../config/api.js";
 
 const SearchResult = () => {
 

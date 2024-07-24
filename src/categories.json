@@ -22,7 +22,7 @@
         },
         {
             "maincategory": "Møbler",
-            "subcategories": ["Bord og stol", "Dekorasjon", "Garderobe", "Hyller og Kommoder", "Senger", "Belysning", "Sofa", "Tepper", "Annet"]
+            "subcategories": ["Antikke møbler", "Bord og stol", "Dekorasjon", "Garderobe", "Hyller og Kommoder", "Senger", "Belysning", "Sofa", "Tepper", "Annet"]
         },
         {
             "maincategory": "Elektronikk",
@@ -30,7 +30,7 @@
         },
         {
             "maincategory": "Torget",
-            "subcategories":["Antikke møbler", "Porselen og keramikk", "Kunst", "Sølvtøy", "Dyr og utstyr", "Håndarbeid", "Musikk og Film", "Bøker", "Brettspill", "Musikkinstrument","Hage og Utstyr","Ventilasjon", "Annet"]
+            "subcategories":["Porselen og keramikk", "Kunst", "Sølvtøy", "Dyr og utstyr", "Håndarbeid", "Musikk og Film", "Bøker", "Brettspill", "Musikkinstrument","Hage og Utstyr","Ventilasjon", "Sykler", "Annet"]
         },
         {
             "maincategory": "Annet",

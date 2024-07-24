@@ -5,7 +5,7 @@ import './Searchbar.css';
 import { InputGroup, Button } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
 
-import { instanceAxs } from '../../config/api'
+import { instanceAxs } from '../../config/api.js'
 
 export default function Searchbar() {
 

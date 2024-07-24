@@ -13,9 +13,9 @@ import Spinner from "react-bootstrap/Spinner";
 
 import { updateUser,removeProfilePicture } from "../../../features/userSliceActions";
 import { getCroppedImage } from '../../../utils/cropImage.js';
-import { dataURLtoFile } from "../../../utils/dataURltoFile";
-import { instanceAxs } from "../../../config/api";
-import { uiSliceActions } from "../../../features/uiSlice";
+import { dataURLtoFile } from "../../../utils/dataURltoFile.js";
+import { instanceAxs } from "../../../config/api.js";
+import { uiSliceActions } from "../../../features/uiSlice.js";
 
 const Profile = () => {
   const user = useSelector(state => state.user.user);
@@ -143,9 +143,9 @@ const Profile = () => {
           <Alert variant="danger" className="padding-0">
               <Alert.Heading><i className="fa-solid fa-circle-exclamation me-2"/>Your account has not been verified</Alert.Heading>
               <p>
-                To verify your account, you can follow the steps in the email sent to you. 
-                If you need a new email, <Alert.Link onClick={sendVerificationEmail}>you can click here</Alert.Link>.
-                By having a verified account, you can create and publish your own annonces.
+                To verify your account, you need to follow the steps in the email sent to you. 
+                If you need to receive a new email, <Alert.Link onClick={sendVerificationEmail}>you can click here</Alert.Link>.
+                By having a verified account, you can create and publish your announcements.
               </p>
           </Alert>
       </div>
