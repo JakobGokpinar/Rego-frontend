@@ -1,4 +1,3 @@
-import { appDataSliceActions } from "./appDataSlice";
 import { useSelector } from "react-redux";
 
 export const fetchNorwayDistricts = () => {
@@ -11,16 +10,17 @@ export const fetchNorwayDistricts = () => {
                     var communeArray = [];
                     for (const item of districtsArray) {
                       for (const kommune of item.kommuner) {
-                        communeArray.push({
-                          fylkesNavn: kommune.fylkesnavn,
-                          fylkesNummer: kommune.fylkesnummer,
-                          kommuneNavn: kommune.kommunenavn,
-                          kommuneNummer: kommune.kommunenummer,
-                        });
+                          let kom = {
+                            fylkesNavn: kommune.fylkesnavn,
+                            fylkesNummer: kommune.fylkesnummer,
+                            kommuneNavn: kommune.kommunenavn,
+                            kommuneNummer: kommune.kommunenummer,
+                          }
+                        communeArray.push(kom);
                       }
                     }
-                    dispatch(appDataSliceActions.setDistricts(data))
-                    dispatch(appDataSliceActions.setCommunes(communeArray))
+                  //  dispatch(appDataSliceActions.setDistricts(data))
+                 //   dispatch(appDataSliceActions.setCommunes(communeArray))
                 });    
         }
         await handleRequest()

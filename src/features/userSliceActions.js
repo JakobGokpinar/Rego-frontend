@@ -98,51 +98,6 @@ export const logoutRequest = () => {
     }
 }
 
-export const updateUser = (data) => {
-    return async (dispatch) => {
-        const handleRequest = async () => {
-            if(data.formData !== null) { 
-                const response = await instanceAxs.post('/profile/upload/picture', data.formData)
-                const msg = response.data.message;
-                if(msg === 'profile picture uploaded') {
-                    dispatch(userActions.setUser({}))
-                    dispatch(userActions.setUser(response.data.user));
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: msg}))
-                } else {
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'error', msg: msg}))
-                }        
-        }
-        setTimeout(async () => {
-            const res = await instanceAxs.post('/profile/update/userinfo', data.userdata)
-            const msg = res.data.message;
-            if(msg === 'User updated') {
-                const user = res.data.user;
-                dispatch(userActions.setUser(user));
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: msg}))
-            }
-        }, 1000)
-        }
-        await handleRequest();
-    }
-}
-
-export const removeProfilePicture = () => {
-    return async (dispatch) => {
-        const handleRequest = async () => {
-            instanceAxs.post('/profile/delete/picture').then(response => {
-                const msg = response.data.message;
-                if(msg === 'User updated') {
-                    const user = response.data.user;
-                    dispatch(userActions.setUser(user));
-                    dispatch(uiSliceActions.setFeedbackBanner({severity: 'success', msg: msg}))
-                }
-                dispatch(uiSliceActions.setFeedbackBanner({severity: 'info', msg: msg}))
-            })
-        }
-        await handleRequest();
-    }
-}
-
 export const addToFavorites = (annonceId) => {
     return async (dispatch) => {
         const handleRequest = async () => {

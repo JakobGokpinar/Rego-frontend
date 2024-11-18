@@ -1,0 +1,19 @@
+.side-img {
+  height: 500px;
+  width: 500px;
+}
+
+/* on phones */
+@media (max-width: 768px) {
+  .login__bg {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .login__bg {
+    margin-top: 5%;
+  }
+}
+
+

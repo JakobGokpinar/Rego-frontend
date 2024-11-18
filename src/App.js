@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import './App.css';
 
-import FeedbackBanner from './FeedbackBanner.js';
-import Navbar from './Component/Navbar/Navbar.js';
-import Footer from './Component/Footer/Footer.js';
-import Menu from './Pages/HomePage/Menu.js';
-import Login from './Pages/LoginAndRegister/Login.js';
-import Register from './Pages/LoginAndRegister/Register.js';
+import Navbar from './components/Navbar/Navbar.js';
+import Footer from './components/Footer/Footer.js';
+/*import FeedbackBanner from './FeedbackBanner.js';
+import LoginAndRegister from './Pages/LoginAndRegister/LoginAndRegister.js';
 import ProductPage from './Pages/ProductPage/ProductPage.js';
 import Chat from './Pages/Chat/Chat';
 import SearchResult from './Pages/SearchedResultPage/SearchResult.js';
@@ -21,50 +18,52 @@ import Favorites from './Pages/Profile/Favorites/Favorites.js';
 import MyAnnonces from './Pages/Profile/MyAnnonces/MyAnnonces.js';
 import PrivacyPolicy from './Pages/PrivacyAndAbout/PrivacyPolicy.js';
 import AboutUs from './Pages/PrivacyAndAbout/AboutUs.js';
-import NotFound from './Pages/NotFound.js';
+import NotFound from './Pages/NotFound.js';*/
 
-import { userActions } from './features/userSlice.js';
-import { logoutRequest } from './features/userSliceActions.js';
-import { fetchNorwayDistricts } from './features/appDataSliceActions.js';
+import AppRoutes from "./routes.js"
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:3000/'
+axios.defaults.withCredentials = true; //ensures that cookies are sent with the request. This is important because we want to have users logged in the whole time they are on the website.
 
 const App = () => {
-  const dispatch = useDispatch();
-  const user = JSON.parse(window.localStorage.getItem('user'));
-  
-  useEffect(() => {
-    const isLoggedIn = JSON.parse(window.localStorage.getItem('isLoggedIn'));
-    const expiry = JSON.parse(window.localStorage.getItem('expiry'));
-    const date = new Date();
+    const [userDoc, setUserDoc] = useState(null);
 
-    if (isLoggedIn === null || user === null) return;
-    
-    if(date.getTime() > expiry) {
-      dispatch(logoutRequest());
-      return;
-    }
-    if(isLoggedIn && user) {
-      dispatch(userActions.login(user));
-    } 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    useEffect( () => {
+      const fetchUserData = async () => {
+          try {
+              const response = await axios.get('/user/isauth');
+              console.log(response)
+             // setUser(response.data);
+          } catch (error) {
+              console.log('Error fetching user data:', error);
+              //setUserDoc(null); // Handle user not authenticated
+          } 
+      };
 
-  useEffect(() => {
-    dispatch(fetchNorwayDistricts());
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      fetchUserData();
+  }, []);
 
     return (
-      <GoogleOAuthProvider clientId='1011630835579-od6btk63gd1bio6bk413r76mh6q0s9s8.apps.googleusercontent.com'>
      <Router>
-        <div style={{marginBottom : 100}}>
-          <Navbar ></Navbar>
-        </div>
-        <div className='app-div'>
-          <div className='app-div__content'>
-            <Routes>
-                  <Route path='/login' element={<Login/>}/>
-                    <Route path="/register" element={<Register/>}></Route>
-                    <Route path='/' element={<Menu/>}/>
+            <Navbar userDoc={userDoc} />
+
+            <Container fluid style={{paddingTop: '80px',display:'flex', alignItems: 'center'}}>
+                  <AppRoutes updtUserDoc={setUserDoc}></AppRoutes>
+            </Container>
+
+            <Footer></Footer>
+     </Router>
+    );
+  }
+
+export default App;
+
+/*
+  <Routes>
+                  <Route path='/login' element={<LoginAndRegister userDoc={userDoc} updtUserDoc={setUserDoc}/>}/>
+                    <Route path="/register" element={<LoginAndRegister userDoc={userDoc} updtUserDoc={setUserDoc}/>}></Route>
+                    <AppRoutes />
                     <Route path='/min-konto' element={<Account/>}/>
                     <Route path='/favoritter' element={<Favorites/>}/>
                     <Route path='/mine-annonser' element={<MyAnnonces/>}/>
@@ -78,14 +77,4 @@ const App = () => {
                     <Route path='/about-us' element={<AboutUs/>}></Route>
                     <Route path="*" element={<NotFound/>}/>
             </Routes>
-          </div>
-          <Footer></Footer>
-        </div>
-     </Router>
-        <FeedbackBanner></FeedbackBanner>
-     </GoogleOAuthProvider>
-    );
-  }
-
-
-export default App;
+  */

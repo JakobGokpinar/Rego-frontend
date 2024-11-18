@@ -1,21 +1,3 @@
-.mainmenu-container {
-  width: 100%;
-}
-
-.mainmenu-content {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 8%;
-  padding-right: 8%;
-  padding-top: 3%;
-}
-
-.mainmenu-container__item {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
 @media (max-width: 768px) {
   .mainmenu-content {
     display: flex;

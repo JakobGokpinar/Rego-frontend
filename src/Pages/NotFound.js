@@ -2,7 +2,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useLocation } from 'react-router-dom';
-import gif from '../utils/not-found.gif';
 import './NotFound.css';
 
 const NotFound = () => {
@@ -19,10 +18,11 @@ const NotFound = () => {
                     </div>
                 </Col>
                 <Col lg={6} >
-                    <img src={gif} className='notFound-gif' alt='foundy'/>             
+                    <img src="/not-found.gif" className='notFound-gif' alt='page not found'/>             
                 </Col>
             </Row>
         </div>
     )  
 }
+
 export default NotFound;

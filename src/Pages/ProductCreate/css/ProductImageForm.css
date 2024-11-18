@@ -1,0 +1,65 @@
+.file-input-design {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust height as needed */
+  }
+  
+  .image-preview-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    row-gap: 20px;
+  }
+
+  .image-container {
+    height: 100px;
+    position: relative;
+  }
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5%;
+  }
+  .delete-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    cursor: pointer;
+    display: none;
+  }
+.image-container:hover{
+    border: 6px solid #2f4f4f;
+    border-radius: 10%;
+}
+.image-container:hover .delete-icon{
+    display: block;
+}
+
+.image-navigation {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  padding: 3px 10px;
+}
+
+.navigation-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  margin: 0%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #2f4f4f;
+}
+
+.navigation-button:hover {
+  background-color: lightgray;
+  border-radius: 10%;
+}
+
