@@ -10,21 +10,66 @@
 	<img src="https://img.shields.io/github/languages/count/JakobGokpinar/Rego-frontend?style=default&color=0080ff" alt="repo-language-count">
 </p>
 
-
 # Rego-frontend
 
-This project is a clone project of renowned www.Finn.no, being made only for personal education purposes.
+This project is a clone project of renowned www.Finn.no, being only made for personal education purposes.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Description
 
-Rego-frontend is a JavaScript-based project. This repository contains the frontend code for the project [www.rego.no](https://www.rego.no), which is a secondhand shopping website similar to ebay.com or finn.no. Users can list any kind of product that they want to sell, and other users can easily see them and get in touch with the seller.
+Rego-frontend is a JavaScript-based project and does not contain the full codebase of the whole www.rego.no project. For backend code, check out [rego-backend](https://github.com/JakobGokpinar/Rego-backend). [rego.no](www.rego.no) is a secondhand shopping website, very similar to ebay.com or finn.no. Users can list any kind of product that they want to sell, and other users can see,like and save them and get in touch with the seller.
 
+## Features
 
-# Getting Started with Create React App
+### User Functions
+- **Login of existing user**: Users can log in with their existing credentials.
+- **Register of a new user**: New users can register to create an account.
+- **Creating annonce**: Users can create new listings for items they want to sell.
+- **Updating profile photo**: Users can update their profile photo.
+- **Updating username and photo**: Users can update their username and profile photo.
+- **Adding a listing to favorites**: Users can add listings to their favorites.
+- **Seeing, previewing and editing a user's annonces**: Users can view, preview, and edit their own listings.
 
-## Available Scripts
+### App Functions
+- **Search product by title, category**: Users can search for products by title and category.
+- **Filter search results**: Users can filter search results based on price, location, brand, category, time added, and more.
+- **Instant chat functionality with the seller**: Users can chat instantly with the seller.
+- **Update announce listing**: Users can update their listings.
+- **Seeing an announce's title**: Users can view the title of an announcement.
+
+## Technologies Used
+
+### Frontend
+- **JavaScript**
+- **HTML**
+- **CSS**
+- **React.js**: For state management and app logic
+- **Bootstrap**: For frontend design
+
+### Backend
+- **Express.js**: Server framework
+- **MongoDB**: Database
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Get Started](#getstarted)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## Installation
+
+To install the dependencies, run:
+
+```bash
+npm install
+```
+
+## Getting Started with Create React App
+
+Available Scripts
 
 In the project directory, you can run:
 
