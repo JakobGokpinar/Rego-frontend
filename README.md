@@ -10,15 +10,17 @@
 	<img src="https://img.shields.io/github/languages/count/JakobGokpinar/Rego-frontend?style=default&color=0080ff" alt="repo-language-count">
 </p>
 
-# Rego-frontend
+<p align="center">
+	This project is a clone project of renowned www.Finn.no, being only made for personal education purposes.
+</p>
+<p align="center">
+	This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+</p>
 
-This project is a clone project of renowned www.Finn.no, being only made for personal education purposes.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Description
 
-Rego-frontend is a JavaScript-based project and does not contain the full codebase of the whole www.rego.no project. For backend code, check out [rego-backend](https://github.com/JakobGokpinar/Rego-backend). [rego.no](www.rego.no) is a secondhand shopping website, very similar to ebay.com or finn.no. Users can list any kind of product that they want to sell, and other users can see,like and save them and get in touch with the seller.
+Rego-frontend is a JavaScript-based project and does not contain the full codebase of the whole www.rego.no project. For backend code, see: [rego-backend](https://github.com/JakobGokpinar/Rego-backend). Rego.no is a secondhand shopping website, very similar to ebay.com or finn.no. Users can list any kind of product that they want to sell, and other users can see,like and save them and get in touch with the seller.
 
 ## Features
 
