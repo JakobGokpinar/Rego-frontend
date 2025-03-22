@@ -3,9 +3,6 @@
 </p>
 <p align="center"><h1 align="center">REGO-FRONTEND</h1></p>
 <p align="center">
-	<em><code>❯ REPLACE-ME</code></em>
-</p>
-<p align="center">
 	[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 	<img src="https://img.shields.io/github/license/JakobGokpinar/Rego-frontend?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/JakobGokpinar/Rego-frontend?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
