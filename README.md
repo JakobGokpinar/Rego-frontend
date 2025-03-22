@@ -1,3 +1,12 @@
+# Rego-frontend
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
+## Description
+
+Rego-frontend is a JavaScript-based project. This repository contains the frontend code for the project [www.rego.no](https://www.rego.no), which is a secondhand shopping website similar to ebay.com or finn.no. Users can list any kind of product that they want to sell, and other users can easily see them and get in touch with the seller.
+
+
 This project is a clone project of renowned www.Finn.no.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
