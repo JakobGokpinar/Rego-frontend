@@ -13,7 +13,7 @@
 	This project is a clone project of renowned www.Finn.no, being only made for personal education purposes.	
 </p>
 <p>
-	This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+	This project was bootstrapped with Create React App - https://github.com/facebook/create-react-app
 </p>
 
 ## Description
