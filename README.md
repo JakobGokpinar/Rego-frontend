@@ -13,7 +13,7 @@
 
 # Rego-frontend
 
-This project is a clone project of renowned www.Finn.no.
+This project is a clone project of renowned www.Finn.no, being made only for personal education purposes.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
