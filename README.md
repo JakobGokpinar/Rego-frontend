@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project is a clone of Finn.no.
+This project is a clone project of renowned www.Finn.no.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
