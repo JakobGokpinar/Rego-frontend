@@ -9,13 +9,8 @@
 	<img src="https://img.shields.io/github/languages/count/JakobGokpinar/Rego-frontend?style=default&color=0080ff" alt="repo-language-count">
 </p>
 
-<p align="center">
-	This project is a clone project of renowned www.Finn.no, being only made for personal education purposes.
-</p>
-<p align="center">
-	This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-</p>
-
+This project is a clone project of renowned www.Finn.no, being only made for personal education purposes.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Description
 
