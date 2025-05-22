@@ -2,6 +2,9 @@
   "name": "secondhand",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+  "node": "18"
+},
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^1.10.1",
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
@@ -23,7 +26,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
     "react-router-dom": "^6.8.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-textarea-autosize": "^8.4.1",
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
@@ -34,8 +37,8 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start start",
-    "dev": "react-scripts start dev",
+    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

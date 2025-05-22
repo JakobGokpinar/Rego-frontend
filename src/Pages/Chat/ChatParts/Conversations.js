@@ -41,11 +41,14 @@ const Conversations = ({ productId, conversation, loggedUser, isActive, findFrie
     }, [productId])
 
     useEffect(() => {
-        if(!conversation || conversation.unreadMessages === 0 || conversation.messages.length === 0) return;
-        let last_msg = conversation.messages[conversation.messages.length - 1]
-        if(last_msg.sender !== loggedUser?._id) {
-            setUnreadCount(conversation.unreadMessages)
+        const getUnreadMsg = async() => {
+            if(!conversation || conversation.unreadMessages === 0 || conversation.messages.length === 0) return;
+            let last_msg = conversation.messages[conversation.messages.length - 1]
+            if(last_msg.sender !== loggedUser?._id) {
+                setUnreadCount(conversation.unreadMessages)
+            }
         }
+        getUnreadMsg()
     }, [conversation])
 
   return (
