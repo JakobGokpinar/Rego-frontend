@@ -54,7 +54,7 @@ const App = () => {
   }, [])
 
     return (
-      <GoogleOAuthProvider clientId='1011630835579-od6btk63gd1bio6bk413r76mh6q0s9s8.apps.googleusercontent.com'>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
      <Router>
         <div style={{marginBottom : 100}}>
           <Navbar ></Navbar>
