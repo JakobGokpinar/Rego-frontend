@@ -54,7 +54,7 @@ const App = () => {
   }, [])
 
     return (
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
      <Router>
         <div style={{marginBottom : 100}}>
           <Navbar ></Navbar>

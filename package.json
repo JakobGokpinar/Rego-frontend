@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-  "node": "18"
-},
+    "node": "18"
+  },
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^1.10.1",
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint-plugin-testing-library": "^7.2.2"
   }
 }
